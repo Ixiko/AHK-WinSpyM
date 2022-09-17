@@ -1,6 +1,6 @@
 ### Window Information Tool
 
-<img src="../Addendum-fuer-Albis-on-Windows-master/Docs/AHK-WinSpy-1663438704373-12.svg" align="left" style="zoom:50%;" />
+<img src="resources/AHK-WinSpy.svg" align="left" style="zoom:50%;" />
 
 a fork by IXIKO in the original by [alguimist](https://sourceforge.net/u/alguimist/profile/)
 
@@ -8,7 +8,7 @@ a fork by IXIKO in the original by [alguimist](https://sourceforge.net/u/alguimi
 
 |   WinSpyM V1.05   |
 | ---- |
-| <img src="../Addendum-fuer-Albis-on-Windows-master/Docs/WindowShot1.JPG" alt="WindowShot1" align="left" style="zoom: 60%;" /> <img src="../Addendum-fuer-Albis-on-Windows-master/Docs/WindowShot.JPG" alt="WindowShot" align="left" style="zoom: 60%;" /> <br> |
+| <img src="resources/WindowShot1.JPG" alt="WindowShot1" align="left" style="zoom: 60%;" /> <img src="resources/WindowShot.JPG" alt="WindowShot" align="left" style="zoom: 60%;" /> <br> |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
 ## Description of modifications
