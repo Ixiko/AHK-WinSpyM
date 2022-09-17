@@ -1,4 +1,4 @@
-### Window Information Tool
+## Window Information Tool
 
 <img src="https://github.com/Ixiko/AHK-WinSpyM/blob/master/Resources/AHK-WinSpy.svg" align="left"  scale="20%" />
 
