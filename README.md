@@ -9,7 +9,7 @@ a fork by IXIKO in the original by [alguimist](https://sourceforge.net/u/alguimi
 |   WinSpyM V1.05   |
 | ---- |
 | <img src="https://github.com/Ixiko/AHK-WinSpyM/blob/master/Resources/WindowShot1.JPG" alt="WindowShot1" align="left" style="zoom: 20%;" /> <img src="https://github.com/Ixiko/AHK-WinSpyM/blob/master/Resources/WindowShot.JPG" alt="WindowShot" align="left" style="zoom: 20%;" /> <br> |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------: 
+| :------------------------------------------------------------------------------------------------------------------------------------------------------: 
 
 ## Description of modifications
 
