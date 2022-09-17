@@ -1,24 +1,25 @@
-﻿; WinSpy - Window Information Tool by Alguimist
-; this is a modified version of WinSpy V1.0.3
+﻿; WinSpyM - Window Information Tool by Alguimist
+; (this is a modified version of WinSpy V1.0.3)
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /* Description of modifications:
 
-	1. Main Window size is increased a little bit to show full informations. You can add own size additions by changing
+	-    Main Window size is increased a little bit to show full informations. You can add own start size additions by changing
 		two variables inside this script: 'plusW' & 'plusH'.
 
-	2. Messages Tab:
+	-    Messages Tab:
 		The result will be displayed in decimal and hexadecimal.
 		Added a message description area for brief information.
 
-	3. at script start WinSpy will be moved to center of primary screen in case it's outside of the visible area. This may happen
+	-   at script start WinSpy will be moved to center of primary screen in case it's outside of the visible area. This may happen
 		if you use different screen resolutions for example in different rdp-sessions.
 
-	4. AlwaysOnTop can be set from main window (checkbox right from 'Compact Mode' checkbox).
+	-   AlwaysOnTop can be set from main window (checkbox right from 'Compact Mode' checkbox).
 		And if the main window was AlwaysOnTop when closing, the setting is restored after the script has started.
 		I missed this feature.
 
-	5. added a 'Reload' Button to reload WinSpy script (coding purposes)
+	-   added a 'Reload' Button to reload WinSpy script (coding purposes)
+
 
  */
 
@@ -43,7 +44,7 @@
 ; Variables
 ;----------------------------------------------------------------------------------------------------------------------------------------------;{
 	Global AppName      	:= "WinSpyM"
-			,  Version          	:= "1.0.3"
+			,  Version          	:= "1.0.5"
 			,  IniFile            	:= AppName . ".ini"
 			,  ResDir             	:= A_ScriptDir . "\Resources"
 			,  hFindTool
@@ -127,11 +128,9 @@ return	ComObj(9,ComObjQuery(ComObjEnwrap(9,pacc),IID,IID),1).document.documentEl
 ;----------------------------------------------------------------------------------------------------------------------------------------------
 ; Main Window
 ;----------------------------------------------------------------------------------------------------------------------------------------------;{
-; Scite RegEx (\s*Gui.*\,.*\,)\s*(.*)w(\d+)(\sh)(\d+)(.*)
-; Scite Replace: \1 % "\2 w" (\3+plusW) "\4" (\5+plusH) "\6"
-
   ; needed for Gui Resize and MaxSize
-	Mon := Array(), MonHMax := 0
+
+    Mon := Array(), MonHMax := 0
 	SysGet, monitorCount, MonitorCount
 	Loop, % monitorCount		{
 		SpyMon:= ScreenDims(A_Index)
@@ -139,7 +138,7 @@ return	ComObj(9,ComObjQuery(ComObjEnwrap(9,pacc),IID,IID),1).document.documentEl
 		MonHMax := MonHMax < Mon[A_Index] ? Mon[A_Index] : MonHMax
 		t.= Mon[A_Index] ", "
 	}
-	;~ ToolTip, % MonHMax ", " Spymon.H ", " SpyMon.H - Floor(SpyMon.H/20) " # "  monitorCount " | ", 2000,250, 2
+
     Menu Tray, Icon, %ResDir%\WinSpy.ico
 
   ; 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶
