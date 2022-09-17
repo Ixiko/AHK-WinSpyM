@@ -1,0 +1,8847 @@
+﻿EM_CANUNDO=Determines w hether there are any actions in an edit control's undo queue. You can send this message to either an edit control or a rich edit control.`n`nwParam:  Not used; must be zero. `n`nlParam:  Not used; must be zero.`n`nReturn value :  If there are actions in the control's undo queue, the return value is nonzero. If the undo queue is empty, the return value is zero.`n`nRemarks:  If the undo queue is not empty, you can send the EEMM__ UUNNDDOO message to the control to undo the most recent operation. 
+EM_CHARFROMPOS=
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets information about the character closest to a specified point in the client area of an edit control. You can send 
+
+this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                      This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       The coordinates of a point in the control's client area. The coordinates are in screen units and are relative to 
+
+       the upper-left corner of the control's client area. 
+
+
+
+       RRiicchh  eeddiitt  ccoonnttrroollss:: A pointer to a PPOOIINNTTLL structure that contains the horizontal and vertical coordinates. 
+
+
+
+       EEddiitt  ccoonnttrroollss:: The LLOOWWOORRDD contains the horizontal coordinate. The HHIIWWOORRDD contains the vertical 
+
+       coordinate. 
+
+
+
+Return value 
+
+
+
+RRiicchh  eeddiitt  ccoonnttrroollss:: The return value specifies the zero-based character index of the character nearest the specified 
+
+point. The return value indicates the last character in the edit control if the specified point is beyond the last 
+
+character in the control. 
+
+
+
+EEddiitt  ccoonnttrroollss:: The LLOOWWOORRDD specifies the zero-based index of the character nearest the specified point. This index 
+
+is relative to the beginning of the control, not the beginning of the line. If the specified point is beyond the last 
+
+character in the edit control, the return value indicates the last character in the control. The HHIIWWOORRDD specifies the 
+
+zero-based index of the line that contains the character. For single-line edit controls, this value is zero. The index 
+
+indicates the line delimiter if the specified point is beyond the last v isible character in a line. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+If a point is passed to EEMM__ CC HHAA RRFFRROOMMPPOOSS as the lParam and the point is outside the bounds of the edit control, 
+
+then the lResult is (65535, 65535). 
+
+
+----------------------- Page 667-----------------------
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                           Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                           Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                       Win 
+
+                                                                                                       user. 
+
+                                                                                                       h 
+
+                                                                                                       (incl 
+
+                                                                                                       ude 
+
+                                                                                                       Win 
+
+                                                                                                       dow 
+
+                                                                                                       s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+PP 
+
+OO 
+
+SS 
+
+FF 
+
+RR 
+
+OO 
+
+MM 
+
+CC 
+
+HH 
+
+AA 
+
+RR 
+
+
+
+OO 
+
+tt 
+
+hh 
+
+ee 
+
+rr 
+
+RR 
+
+ee 
+
+ss 
+
+oo 
+
+
+----------------------- Page 668-----------------------
+
+ uu 
+
+ rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+
+ MM 
+
+AA 
+
+ KK 
+
+ EE 
+
+ LL 
+
+ PP 
+
+AA 
+
+ RR 
+
+AA 
+
+ MM 
+
+
+
+ PP 
+
+OO 
+
+ II 
+
+ NN 
+
+TT 
+
+ LL 
+
+
+----------------------- Page 669-----------------------
+
+        EM_EMPTYUNDOBUFFER message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Resets the undo flag of an edit control. The undo flag is set w henever an operation w ithin the edit control can be 
+
+undone. You can send this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+The undo flag is automatically reset w henever the edit control receives a WW MM__ SS EETTTTEEXXTT or EEMM__ SS EETTHHAA NNDDLLEE 
+
+message. 
+
+
+
+EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt   11..00:: The control can only undo or redo the most recent operation. 
+
+
+
+RRiicchh   EEddiitt  22..00  aanndd   llaatteerr :: The EEMM__ EEMMPPTTYY UUNNDDOOBBUUFFFFEERR message empties all undo and redo buffers. Rich edit 
+
+controls enable the user to undo or redo multiple operations. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 670-----------------------
+
+    Header 
+
+                                                                                                    Win 
+
+                                                                                                    user. 
+
+                                                                                                    h 
+
+                                                                                                    (incl 
+
+                                                                                                    ude 
+
+                                                                                                    Win 
+
+                                                                                                    dow 
+
+                                                                                                    s.h) 
+
+
+
+See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+CC 
+
+AA 
+
+NN 
+
+UU 
+
+NN 
+
+DD 
+
+OO 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+HH 
+
+AA 
+
+NN 
+
+DD 
+
+LL 
+
+EE 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+UU 
+
+NN 
+
+DD 
+
+
+----------------------- Page 671-----------------------
+
+OO 
+
+
+
+OO 
+
+tt 
+
+ hh 
+
+ee 
+
+ rr 
+
+ RR 
+
+ee 
+
+ss 
+
+oo 
+
+ uu 
+
+ rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+
+WW 
+
+ MM 
+
+__ 
+
+ SS 
+
+ EE 
+
+TT 
+
+TT 
+
+ EE 
+
+XX 
+
+TT 
+
+
+----------------------- Page 672-----------------------
+
+        EM_FMTLINES message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets a flag that determines w hether a multiline edit control includes soft line-break characters. A soft line break 
+
+consists of two carriage returns and a line feed and is inserted at the end of a line that is broken because of 
+
+wordw rapping. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       Specifies w hether soft line-break characters are to be inserted. A value of TTRRUUEE inserts the characters; a value 
+
+       of FFAA LLSS EE removes them. 
+
+
+
+l                                                                                                This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is identical to the w Param parameter. 
+
+
+
+Remarks 
+
+
+
+This message affects only the buffer returned by the EEMM__ GG EETTHHAA NNDDLLEE message and the text returned by the 
+
+WW MM__ GG EETTTTEEXXTT message. It has no effect on the display of the text w ithin the edit control. 
+
+
+
+The EEMM__ FFMMTTLLIINNEESS message does not affect a line that ends w ith a hard line break. A hard line break consists of 
+
+one carriage return and a line feed. 
+
+
+
+   NNOOTTEE 
+
+  The size of the text changes when this message is processed. 
+
+
+
+RRiicchh   EEddiitt:: The EEMM__ FFMMTTLLIINNEESS message is not supported. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                          Windows Vista  [desktop apps only] 
+
+
+----------------------- Page 673-----------------------
+
+    Minimum supported server                                                                                 Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                             Win 
+
+                                                                                                              user. 
+
+                                                                                                              h 
+
+                                                                                                              (incl 
+
+                                                                                                              ude 
+
+                                                                                                             Win 
+
+                                                                                                             dow 
+
+                                                                                                             s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+HH 
+
+AA 
+
+NN 
+
+DD 
+
+LL 
+
+EE 
+
+
+
+OO 
+
+tt 
+
+hh 
+
+ee 
+
+rr 
+
+RR 
+
+ee 
+
+ss 
+
+oo 
+
+uu 
+
+rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+----------------------- Page 674-----------------------
+
+WW 
+
+ MM 
+
+__ 
+
+GG 
+
+ EE 
+
+TT 
+
+TT 
+
+ EE 
+
+XX 
+
+TT 
+
+
+----------------------- Page 675-----------------------
+
+         EM_GETCUEBANNER message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the text that is displayed as the textual cue, or tip, in an edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+[ 
+
+i 
+
+n 
+
+] 
+
+
+
+       A pointer to a Unicode buffer that receives the text set as the textual cue. The caller is responsible for 
+
+       allocating the buffer. 
+
+
+
+l                             The size of the buffer pointed to by w Param in WWCC HHAA RRss, including the terminating NNUULLLL. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+[ 
+
+i 
+
+n 
+
+] 
+
+
+
+Return value 
+
+
+
+Returns TTRRUUEE if successful or FFAA LLSS EE otherw ise. 
+
+
+
+Remarks 
+
+
+
+   NNOOTTEE 
+
+   To use this message, you must provide a manifest specifying Comclt32.dll version 6.0.  For more information on manifests, see 
+
+   Enabling Visual Styles. 
+
+
+
+Requirements 
+
+
+
+   Minimum supported client                                               Windows Vista  [desktop apps only] 
+
+
+----------------------- Page 676-----------------------
+
+    Minimum supported server                                                                                        Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                                    Co 
+
+                                                                                                                    mm 
+
+                                                                                                                    ctrl. 
+
+                                                                                                                    h 
+
+
+
+ See also 
+
+
+
+EE 
+
+dd 
+
+ii 
+
+tt 
+
+__ 
+
+GG 
+
+ee 
+
+tt 
+
+CC 
+
+uu 
+
+ee 
+
+BB 
+
+aa 
+
+nn 
+
+nn 
+
+ee 
+
+rr 
+
+TT 
+
+ee 
+
+xx 
+
+tt 
+
+
+----------------------- Page 677-----------------------
+
+        EM_GETFIRSTVISIBLELINE message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the zero-based index of the uppermost v isible line in a multiline edit control. You can send this message to 
+
+either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                 Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                 Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is the zero-based index of the uppermost v isible line in a multiline edit control. 
+
+
+
+EEddiitt  ccoonnttrroollss:: For single-line edit controls, the return value is the zero-based index of the first v isible character. 
+
+
+
+RRiicchh  eeddiitt  ccoonnttrroollss:: For single-line rich edit controls, the return value is zero. 
+
+
+
+Remarks 
+
+
+
+The number of lines and the length of the lines in an edit control depend on the w idth of the control and the current 
+
+Wordw rap setting. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 678-----------------------
+
+Header 
+
+                                                                       Win 
+
+                                                                       user. 
+
+                                                                       h 
+
+                                                                       (incl 
+
+                                                                       ude 
+
+                                                                       Win 
+
+                                                                       dow 
+
+                                                                       s.h) 
+
+
+----------------------- Page 679-----------------------
+
+        EM_GETHANDLE message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets a handle of the memory currently allocated for a multiline edit control's text. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                        Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                        Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is a memory handle identifying the buffer that holds the content of the edit control. If an error 
+
+occurs, such as sending the message to a single-line edit control, the return value is zero. 
+
+
+
+Remarks 
+
+
+
+If the function succeeds, the application can access the contents of the edit control by casting the return value to 
+
+HHLLOOCCAA LL and passing it to LLooccaallLLoocckk. LLooccaallLLoocckk returns a pointer to a buffer that is a null-terminated array of 
+
+CC HHAA RRs or WWCC HHAA RRs, depending on w hether an ANSI or Unicode function created the control. For example, if 
+
+CCrreeaatteeWW iinnddooww EExxAA was used the buffer is an array of CC HHAA RRs, but if CCrreeaatteeWW iinnddooww EExxWW was used the buffer is 
+
+an array of WWCC HHAA RRs. The application may not change the contents of the buffer. To unlock the buffer, the 
+
+application calls LLooccaallUUnnlloocckk before allow ing the edit control to receive new messages. 
+
+
+
+   NNOOTTEE 
+
+   For Comctl32.dll version 6, the buffer always contains an array of WWCC HHAA RRs, regardless of whether an ANSI or  Unicode 
+
+   function created the edit control.  For more information on  DLL versions, see Common Control Versions. 
+
+
+
+If your application cannot abide by the restrictions imposed by EEMM__ GG EETTHHAA NNDDLLEE, use the 
+
+GGeettWW iinnddoowwTTeexxttLLeennggtthh and GGeettWW iinnddoowwTTeexxtt functions to copy the contents of the edit control into an 
+
+application-prov ided buffer. 
+
+
+
+RRiicchh   EEddiitt:: The EEMM__ GG EETTHHAA NNDDLLEE message is not supported. Rich edit controls do not store text as a simple array 
+
+of characters. 
+
+
+
+Requirements 
+
+
+----------------------- Page 680-----------------------
+
+    Minimum supported client                                                                                 Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                                 Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                             Win 
+
+                                                                                                             user. 
+
+                                                                                                             h 
+
+                                                                                                             (incl 
+
+                                                                                                             ude 
+
+                                                                                                             Win 
+
+                                                                                                             dow 
+
+                                                                                                             s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+HH 
+
+AA 
+
+NN 
+
+DD 
+
+LL 
+
+EE 
+
+
+
+OO 
+
+tt 
+
+hh 
+
+ee 
+
+rr 
+
+RR 
+
+ee 
+
+ss 
+
+oo 
+
+uu 
+
+rr 
+
+cc 
+
+ee 
+
+
+----------------------- Page 681-----------------------
+
+ss 
+
+
+
+GG 
+
+ee 
+
+tt 
+
+WW 
+
+ ii 
+
+ nn 
+
+dd 
+
+oo 
+
+ww 
+
+TT 
+
+ee 
+
+xx 
+
+tt 
+
+
+
+GG 
+
+ee 
+
+tt 
+
+WW 
+
+ ii 
+
+ nn 
+
+dd 
+
+oo 
+
+ww 
+
+TT 
+
+ee 
+
+xx 
+
+tt 
+
+ LL 
+
+ee 
+
+ nn 
+
+gg 
+
+tt 
+
+ hh 
+
+
+
+ LL 
+
+oo 
+
+cc 
+
+aa 
+
+ ll 
+
+ LL 
+
+oo 
+
+cc 
+
+ kk 
+
+
+
+ LL 
+
+oo 
+
+cc 
+
+aa 
+
+ ll 
+
+ UU 
+
+ nn 
+
+
+----------------------- Page 682-----------------------
+
+ ll 
+
+oo 
+
+cc 
+
+ kk 
+
+
+----------------------- Page 683-----------------------
+
+          EM_GETHILITE message 
+
+
+
+         2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+This message is not implemented. 
+
+
+
+  
+
+
+
+  
+
+
+----------------------- Page 684-----------------------
+
+           EM_GETIMESTATUS message 
+
+
+
+          2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets a set of status flags that indicate how the edit control interacts w ith the Input Method Editor (IME). 
+
+
+
+ Parameters 
+
+
+
+w                                                                The ty pe of status to retrieve. This parameter can be the follow ing value. 
+
+P 
+
+a                                                                  VVAA LL UUEE                                            MM EEAA NN IINNGG 
+
+r 
+
+a                                                                                                                          Sets behavior for handling the 
+
+                                                                    EEMM 
+
+                                                                                                                           composition string. 
+
+m                                                                   SSIISS__ 
+
+                                                                   CCOO 
+
+                                                                    MMPP 
+
+                                                                   OOSSII 
+
+                                                                   TTIIOO 
+
+                                                                    NNSSTT 
+
+                                                                    RRIINN 
+
+                                                                   GG 
+
+
+
+l                                                                                                                                  This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+ Return value 
+
+
+
+Data specific to the ty pe of status to retrieve. With the EEMMSS IISS__ CCOOMMPPOOSS IITTIIOONNSSTTRRIINNGG value for status, this return 
+
+value is one or more of the follow ing values. 
+
+
+
+   RREETT UURRNN  CC OO DDEE                                                               DDEESSCC RRIIPPTT IIOO NN 
+
+
+
+                                                                                           If this flag is set, the edit control hooks the 
+
+   EEIIMM 
+
+                                                                                           WW MM__ IIMMEE__CCOO MMPPOOSSIITTIIOO NN message with fFlags set to 
+
+   EESS__                                                                                  GCS_ RESULTSTR and returns the result string immediately.  If 
+
+   GG EETT 
+
+                                                                                           this flag is not set, the edit control passes the 
+
+   CCOO 
+
+                                                                                           WW MM__ IIMMEE__CCOO MMPPOOSSIITTIIOO NN message to the default window 
+
+   MMPP 
+
+                                                                                           procedure and processes the result string from the 
+
+   SSTTRR 
+
+                                                                                           WW MM__CC HHAA RR message; this is the default behavior of the edit 
+
+   AATTOO 
+
+                                                                                           control. 
+
+   NNCC 
+
+   EE 
+
+
+----------------------- Page 685-----------------------
+
+   RREETT UURRNN  CC OO DDEE                                                                     DDEESSCC RRIIPPTT IIOO NN 
+
+
+
+                                                                                                 If this flag is set, the edit control cancels the composition 
+
+   EEIIMM 
+
+                                                                                                 string when it receives the WW MM__ SSEETTFFOOCCUUSS message.  If this 
+
+   EESS__                                                                                        flag is not set, the edit control does not cancel the 
+
+   CCAA 
+
+                                                                                                 composition string; this is the default behavior of the edit 
+
+   NNCC 
+
+                                                                                                 control. 
+
+   EELLCC 
+
+   OO MM 
+
+   PPSSTT 
+
+   RRIINN 
+
+   FFOO 
+
+   CCUU 
+
+   SS 
+
+
+
+                                                                                                 If this flag is set, the edit control completes the composition 
+
+   EEIIMM 
+
+                                                                                                 string upon receiving the WW MM__ KKIILLLLFFOOCCUUSS message.  If this 
+
+   EESS__                                                                                        flag is not set, the edit control does not complete the 
+
+   CCOO 
+
+                                                                                                 composition string; this is the default behavior of the edit 
+
+   MMPP 
+
+                                                                                                 control. 
+
+   LLEETT 
+
+   EECC 
+
+   OO MM 
+
+   PPSSTT 
+
+   RRKKII 
+
+   LLLLFF 
+
+   OOCC 
+
+   UUSS 
+
+
+
+ Remarks 
+
+
+
+RRiicchh   EEddiitt:: The EEMM__ GG EETTIIMMEESSTTAATTUUSS message is not supported. 
+
+
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                     Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                     Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                 Win 
+
+                                                                                                 user. 
+
+                                                                                                 h 
+
+                                                                                                 (incl 
+
+                                                                                                 ude 
+
+                                                                                                 Win 
+
+                                                                                                 dow 
+
+                                                                                                 s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+
+----------------------- Page 686-----------------------
+
+ EE 
+
+TT 
+
+ II 
+
+ MM 
+
+ EE 
+
+SS 
+
+TT 
+
+AA 
+
+TT 
+
+ UU 
+
+SS 
+
+
+----------------------- Page 687-----------------------
+
+        EM_GETLIMITTEXT message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the current text limit for an edit control. You can send this message to either an edit control or a rich edit 
+
+control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is the text limit. 
+
+
+
+Remarks 
+
+
+
+EEddiitt  ccoonnttrroollss,,   RRiicchh   EEddiitt  22..00  aanndd   llaatteerr :: The text limit is the maximum amount of text, in TTCC HHAA RRs, that the control 
+
+can contain. For ANSI text, this is the number of bytes; for Unicode text, this is the number of characters. Two 
+
+documents w ith the same character limit w ill yield the same text limit, even if one is ANSI and the other is Unicode. 
+
+
+
+RRiicchh   EEddiitt   11..00:: The text limit is the maximum amount of text, in bytes, that the rich edit control can contain. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 688-----------------------
+
+    Header 
+
+                                                                                                        Win 
+
+                                                                                                        user. 
+
+                                                                                                        h 
+
+                                                                                                        (incl 
+
+                                                                                                        ude 
+
+                                                                                                        Win 
+
+                                                                                                        dow 
+
+                                                                                                        s.h) 
+
+
+
+ See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+LL 
+
+II 
+
+MM 
+
+II 
+
+TT 
+
+TT 
+
+EE 
+
+XX 
+
+TT 
+
+
+----------------------- Page 689-----------------------
+
+        EM_GETLINE message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Copies a line of text from an edit control and places it in a specified buffer. You can send this message to either an 
+
+edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      The zero-based index of the line to retrieve from a multiline edit control. A value of zero specifies the topmost 
+
+       line. This parameter is ignored by a single-line edit control. 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      A pointer to the buffer that receives a copy of the line. Before sending the message, set the first word of this 
+
+       buffer to the size, in TTCC HHAA RRs, of the buffer. For ANSI text, this is the number of bytes; for Unicode text, this is 
+
+      the number of characters. The size in the first word is overw ritten by the copied line. 
+
+
+
+Return value 
+
+
+
+The return value is the number of TTCC HHAA RRs copied. The return value is zero if the line number specified by the 
+
+w Param parameter is greater than the number of lines in the edit control. 
+
+
+
+Remarks 
+
+
+
+EEddiitt  ccoonnttrroollss:: The copied line does not contain a terminating null character. 
+
+
+
+RRiicchh  eeddiitt  ccoonnttrroollss:: Supported in Microsoft Rich Edit  1.0 and later. The copied line does not contain a terminating 
+
+null character, unless no text was copied. If no text was copied, the message places a null character at the beginning 
+
+of the buffer. For information about the compatibility of rich edit versions w ith the various system versions, see 
+
+About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                          Windows Vista  [desktop apps only] 
+
+
+----------------------- Page 690-----------------------
+
+    Minimum supported server                                                                                        Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                                    Win 
+
+                                                                                                                    user. 
+
+                                                                                                                    h 
+
+                                                                                                                    (incl 
+
+                                                                                                                    ude 
+
+                                                                                                                    Win 
+
+                                                                                                                    dow 
+
+                                                                                                                    s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+LL 
+
+EE 
+
+NN 
+
+GG 
+
+TT 
+
+HH 
+
+
+
+EE 
+
+dd 
+
+ii 
+
+tt 
+
+__ 
+
+GG 
+
+ee 
+
+tt 
+
+LL 
+
+ii 
+
+nn 
+
+ee 
+
+
+
+OO 
+
+
+----------------------- Page 691-----------------------
+
+tt 
+
+ hh 
+
+ee 
+
+ rr 
+
+ RR 
+
+ee 
+
+ss 
+
+oo 
+
+ uu 
+
+ rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+
+WW 
+
+ MM 
+
+__ 
+
+GG 
+
+ EE 
+
+TT 
+
+TT 
+
+ EE 
+
+XX 
+
+TT 
+
+
+----------------------- Page 692-----------------------
+
+        EM_GETLINECOUNT message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the number of lines in a multiline edit control. You can send this message to either an edit control or a rich edit 
+
+control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                 Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                 Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is an integer specifying the total number of text lines in the multiline edit control or rich edit 
+
+control. If the control has no text, the return value is  1. The return value w ill never be less than  1. 
+
+
+
+Remarks 
+
+
+
+The EEMM__ GG EETTLLIINNEECCOOUUNNTT message retrieves the total number of text lines, not j ust the number of lines that are 
+
+currently v isible. 
+
+
+
+If the Wordw rap feature is enabled, the number of lines can change w hen the dimensions of the editing w indow 
+
+change. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 693-----------------------
+
+    Header 
+
+                                                                                                                   Win 
+
+                                                                                                                   user. 
+
+                                                                                                                   h 
+
+                                                                                                                   (incl 
+
+                                                                                                                   ude 
+
+                                                                                                                   Win 
+
+                                                                                                                   dow 
+
+                                                                                                                   s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+LL 
+
+EE 
+
+NN 
+
+GG 
+
+TT 
+
+HH 
+
+
+
+EE 
+
+dd 
+
+ii 
+
+tt 
+
+__ 
+
+
+----------------------- Page 694-----------------------
+
+GG 
+
+ee 
+
+tt 
+
+ LL 
+
+ ii 
+
+ nn 
+
+ee 
+
+CC 
+
+oo 
+
+ uu 
+
+ nn 
+
+tt 
+
+
+----------------------- Page 695-----------------------
+
+        EM_GETMARGINS message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the w idths of the left and right margins for an edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                   Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                   Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+Returns the w idth of the left margin in the LOWORD, and the w idth of the right margin in the HIWORD. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: The EEMM__ GG EETTMMAA RRGG IINNSS message is not supported. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                         Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                         Windows Server 2003  [desktop apps only] 
+
+
+
+  Header 
+
+                                                                   Win 
+
+                                                                   user. 
+
+                                                                   h 
+
+                                                                   (incl 
+
+                                                                   ude 
+
+                                                                   Win 
+
+                                                                   dow 
+
+                                                                   s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+
+----------------------- Page 696-----------------------
+
+ MM 
+
+__ 
+
+ SS 
+
+ EE 
+
+TT 
+
+ MM 
+
+AA 
+
+ RR 
+
+GG 
+
+ II 
+
+ NN 
+
+ SS 
+
+
+----------------------- Page 697-----------------------
+
+        EM_GETMODIFY message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the state of an edit control's modification flag. The flag indicates w hether the contents of the edit control have 
+
+been modified. You can send this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+If the contents of edit control have been modified, the return value is nonzero; otherw ise, it is zero. 
+
+
+
+Remarks 
+
+
+
+The system automatically clears the modification flag to zero w hen the control is created. If the user changes the 
+
+control's text, the system sets the flag to nonzero. You can send the EEMM__ SS EETTMMOODDIIFFYY message to the edit control to 
+
+set or clear the flag. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                       Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                       Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 698-----------------------
+
+    Header 
+
+                                                                                                Win 
+
+                                                                                                user. 
+
+                                                                                                h 
+
+                                                                                                (incl 
+
+                                                                                                ude 
+
+                                                                                                Win 
+
+                                                                                                dow 
+
+                                                                                                s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+MM 
+
+OO 
+
+DD 
+
+II 
+
+FF 
+
+YY 
+
+
+----------------------- Page 699-----------------------
+
+        EM_GETPASSWORDCHAR message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the password character that an edit control displays w hen the user enters text. You can send this message to 
+
+either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value specifies the character to be displayed in place of any characters ty ped by the user. If the return 
+
+value is NNUULLLL, there is no password character, and the control displays the characters ty ped by the user. 
+
+
+
+Remarks 
+
+
+
+If an edit control is created w ith the EESS__ PPAASSSSWWOORRDD sty le, the default password character is set to an asterisk (*). If 
+
+an edit control is created w ithout the EESS__ PPAASSSSWWOORRDD sty le, there is no password character. To change the 
+
+password character, send the EEMM__ SS EETTPPAASSSSWWOORRDDCC HHAA RR message. 
+
+
+
+EEddiitt  ccoonnttrroollss:: Multiline edit controls do not support the password sty le or messages. 
+
+
+
+RRiicchh  eeddiitt:: Supported in Microsoft Rich Edit 2.0 and later. Both single-line and multiline edit controls support the 
+
+password sty le and messages. For information about the compatibility of rich edit versions w ith the various system 
+
+versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 700-----------------------
+
+   Header 
+
+                                                                                           Win 
+
+                                                                                           user. 
+
+                                                                                           h 
+
+                                                                                           (incl 
+
+                                                                                           ude 
+
+                                                                                           Win 
+
+                                                                                           dow 
+
+                                                                                           s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+PP 
+
+AA 
+
+SS 
+
+SS 
+
+WW 
+
+OO 
+
+RR 
+
+DD 
+
+CC 
+
+HH 
+
+AA 
+
+RR 
+
+
+----------------------- Page 701-----------------------
+
+        EM_GETRECT message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the formatting rectangle of an edit control. The formatting rectangle is the limiting rectangle into w hich the 
+
+control draws the text. The limiting rectangle is independent of the size of the edit-control w indow. You can send 
+
+this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                               This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                   A pointer to a RREECCTT structure that receives the formatting rectangle. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is not meaningful. 
+
+
+
+Remarks 
+
+
+
+You can modify the formatting rectangle of a multiline edit control by using the EEMM__ SS EETTRREECCTT and 
+
+EEMM__ SS EETTRREECCTTNNPP messages. 
+
+
+
+Under certain conditions, EEMM__ GG EETTRREECCTT might not return the exact values that EEMM__ SS EETTRREECCTT or EEMM__ SS EETTRREECCTTNNPP 
+
+set it w ill be approximately correct, but it can be off by a few pixels. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. The formatting rectangle does not include the selection 
+
+bar, w hich is an unmarked area to the left of each paragraph. W hen clicked, the selection bar selects the line. For 
+
+information about the compatibility of rich edit versions w ith the various system versions, see About Rich Edit 
+
+Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                         Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                         Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 702-----------------------
+
+    Header 
+
+                                                                                                            Win 
+
+                                                                                                            user. 
+
+                                                                                                            h 
+
+                                                                                                            (incl 
+
+                                                                                                            ude 
+
+                                                                                                            Win 
+
+                                                                                                            dow 
+
+                                                                                                            s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+RR 
+
+EE 
+
+CC 
+
+TT 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+RR 
+
+EE 
+
+CC 
+
+TT 
+
+NN 
+
+PP 
+
+
+
+OO 
+
+tt 
+
+hh 
+
+ee 
+
+rr 
+
+RR 
+
+
+----------------------- Page 703-----------------------
+
+ee 
+
+ss 
+
+oo 
+
+ uu 
+
+ rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+
+ RR 
+
+ EE 
+
+CC 
+
+TT 
+
+
+----------------------- Page 704-----------------------
+
+        EM_GETSEL message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the starting and ending character positions (in TTCC HHAA RRs) of the current selection in an edit control. You can 
+
+send this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      A pointer to a DDWWOORRDD value that receives the starting position of the selection. This parameter can be NNUULLLL. 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      A pointer to a DDWWOORRDD value that receives the position of the first unselected character after the end of the 
+
+       selection. This parameter can be NNUULLLL. 
+
+
+
+Return value 
+
+
+
+The return value is a zero-based value w ith the starting position of the selection in the LLOOWWOORRDD and the position 
+
+of the first TTCC HHAA RR after the last selected TTCC HHAA RR in the HHIIWWOORRDD. If either of these values exceeds 65,535, the 
+
+return value is -1. 
+
+
+
+It is better to use the values returned in w Param and lParam because they are full 32-bit values. 
+
+
+
+Remarks 
+
+
+
+If there is no selection, the starting and ending values are both the position of the caret. 
+
+
+
+RRiicchh  eeddiitt  ccoonnttrroollss:: You can also use the EEMM__ EEXXGG EETTSS EELL message to retrieve the same information. 
+
+EEMM__ EEXXGG EETTSS EELL also returns starting and ending character positions as 32-bit values. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                           Windows Vista  [desktop apps only] 
+
+
+----------------------- Page 705-----------------------
+
+    Minimum supported server                                                                               Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                           Win 
+
+                                                                                                           user. 
+
+                                                                                                           h 
+
+                                                                                                           (incl 
+
+                                                                                                           ude 
+
+                                                                                                           Win 
+
+                                                                                                           dow 
+
+                                                                                                           s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+EE 
+
+XX 
+
+GG 
+
+EE 
+
+TT 
+
+SS 
+
+EE 
+
+LL 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+SS 
+
+EE 
+
+LL 
+
+
+----------------------- Page 706-----------------------
+
+        EM_GETTHUMB message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the position of the scroll box (thumb) in the vertical scroll bar of a multiline edit control. You can send this 
+
+message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                  Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is the position of the scroll box. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit 2.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+
+  Header 
+
+                                                                  Win 
+
+                                                                  user. 
+
+                                                                  h 
+
+                                                                  (incl 
+
+                                                                  ude 
+
+                                                                  Win 
+
+                                                                  dow 
+
+                                                                  s.h) 
+
+
+----------------------- Page 707-----------------------
+
+        EM_GETWORDBREAKPROC message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the address of the current Wordw rap function. You can send this message to either an edit control or a rich 
+
+edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value specifies the address of the application-defined Wordw rap function. The return value is NNUULLLL if 
+
+no Wordw rap function exists. 
+
+
+
+Remarks 
+
+
+
+A Wordw rap function scans a text buffer that contains text to be sent to the display, looking for the first word that 
+
+does not fit on the current display line. The wordw rap function places this word at the beginning of the next line on 
+
+the display. A Wordw rap function defines the point at w hich the system should break a line of text for multiline edit 
+
+controls, usually at a space character that separates two words. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                       Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                       Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 708-----------------------
+
+   Header 
+
+                                                                                             Win 
+
+                                                                                             user. 
+
+                                                                                             h 
+
+                                                                                             (incl 
+
+                                                                                             ude 
+
+                                                                                             Win 
+
+                                                                                             dow 
+
+                                                                                             s.h) 
+
+
+
+See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+E 
+
+d 
+
+i 
+
+t 
+
+W 
+
+o 
+
+r 
+
+d 
+
+B 
+
+r 
+
+e 
+
+a 
+
+k 
+
+P 
+
+r 
+
+o 
+
+c 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+FF 
+
+MM 
+
+TT 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+SS 
+
+
+----------------------- Page 709-----------------------
+
+ EE 
+
+ MM 
+
+__ 
+
+ SS 
+
+ EE 
+
+TT 
+
+WW 
+
+OO 
+
+ RR 
+
+ DD 
+
+ BB 
+
+ RR 
+
+ EE 
+
+AA 
+
+ KK 
+
+ PP 
+
+ RR 
+
+OO 
+
+CC 
+
+
+----------------------- Page 710-----------------------
+
+        EM_HIDEBALLOONTIP message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Hides any balloon tip associated w ith an edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+If the message succeeds, it returns TTRRUUEE. Otherw ise it returns FFAA LLSS EE. 
+
+
+
+Remarks 
+
+
+
+  NNOOTTEE 
+
+  To use this message, you must provide a manifest specifying Comclt32.dll version 6.0.  For more information on manifests, see 
+
+  Enabling Visual Styles. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                       Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                       Windows Server 2003  [desktop apps only] 
+
+
+
+  Header 
+
+                                                                 Co 
+
+                                                                 mm 
+
+                                                                 ctrl. 
+
+                                                                 h 
+
+
+
+See also 
+
+
+----------------------- Page 711-----------------------
+
+ EE 
+
+ dd 
+
+ ii 
+
+tt 
+
+__ 
+
+ HH 
+
+ ii 
+
+ dd 
+
+ ee 
+
+ BB 
+
+ aa 
+
+ ll 
+
+ ll 
+
+ oo 
+
+ oo 
+
+ nn 
+
+TT 
+
+ ii 
+
+ pp 
+
+
+----------------------- Page 712-----------------------
+
+        EM_LIMITTEXT message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the text limit of an edit control. The text limit is the maximum amount of text, in TTCC HHAA RRs, that the user can ty pe 
+
+into the edit control. You can send this message to either an edit control or a rich edit control. 
+
+
+
+For edit controls and Microsoft Rich Edit  1.0, bytes are used. For Microsoft Rich Edit 2.0 and later, characters are 
+
+used. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       The maximum number of TTCC HHAA RRs the user can enter. For ANSI text, this is the number of bytes; for Unicode 
+
+       text, this is the number of characters. This number does not include the terminating null character. 
+
+
+
+       RRiicchh  eeddiitt  ccoonnttrroollss:: If this parameter is zero, the text length is set to 64,000 characters. 
+
+
+
+       If this parameter is zero, the text length is set to 0x7FFFFFFE characters for single-line edit controls or -1 for 
+
+       multiline edit controls. 
+
+
+
+l                                                                                                  This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+The EEMM__ LLIIMMIITTTTEEXXTT message limits only the text the user can enter. It does not affect any text already in the edit 
+
+control w hen the message is sent, nor does it affect the length of the text copied to the edit control by the 
+
+WW MM__ SS EETTTTEEXXTT message. If an application uses the WW MM__ SS EETTTTEEXXTT message to place more text into an edit control 
+
+than is specified in the EEMM__ LLIIMMIITTTTEEXXTT message, the user can edit the entire contents of the edit control. 
+
+
+
+Before EEMM__ LLIIMMIITTTTEEXXTT is called, the default limit for the amount of text a user can enter in an edit control is 32,767 
+
+characters. 
+
+
+
+For single-line edit controls, the text limit is either 0x7FFFFFFE bytes or the value of the w Param parameter, 
+
+w hichever is smaller. For multiline edit controls, this value is either -1 byte or the value of the w Param parameter, 
+
+w hichever is smaller. 
+
+
+----------------------- Page 713-----------------------
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. Use the message EEMM__ EEXX LLIIMMIITTTTEEXXTT for text length 
+
+values greater than 64,000. For information about the compatibility of rich edit versions w ith the various system 
+
+versions, see About Rich Edit Controls. 
+
+
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                                   Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                                   Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                               Win 
+
+                                                                                                               user. 
+
+                                                                                                               h 
+
+                                                                                                               (incl 
+
+                                                                                                               ude 
+
+                                                                                                               Win 
+
+                                                                                                               dow 
+
+                                                                                                               s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+EE 
+
+XX 
+
+LL 
+
+II 
+
+MM 
+
+II 
+
+TT 
+
+TT 
+
+EE 
+
+XX 
+
+TT 
+
+
+
+EE 
+
+dd 
+
+ii 
+
+tt 
+
+__ 
+
+
+----------------------- Page 714-----------------------
+
+ LL 
+
+ ii 
+
+ mm 
+
+ ii 
+
+tt 
+
+TT 
+
+ee 
+
+xx 
+
+tt 
+
+
+
+OO 
+
+tt 
+
+ hh 
+
+ee 
+
+ rr 
+
+ RR 
+
+ee 
+
+ss 
+
+oo 
+
+ uu 
+
+ rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+
+WW 
+
+ MM 
+
+__ 
+
+ SS 
+
+ EE 
+
+TT 
+
+TT 
+
+ EE 
+
+XX 
+
+TT 
+
+
+----------------------- Page 715-----------------------
+
+        EM_LINEFROMCHAR message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the index of the line that contains the specified character index in a multiline edit control. A character index is 
+
+the zero-based index of the character from the beginning of the edit control. You can send this message to either an 
+
+edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      The character index of the character contained in the line w hose number is to be retrieved. If this parameter is 
+
+      -1, EEMM__ LLIINNEEFFRROOMMCC HHAA RR retrieves either the line number of the current line (the line containing the caret) 
+
+      or, if there is a selection, the line number of the line containing the beginning of the selection. 
+
+
+
+l                                                                                            This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is the zero-based line number of the line containing the character index specified by w Param. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. If the character index is greater than 64,000, use the 
+
+EEMM__ EEXX LLIINNEEFFRROOMMCC HHAA RR message. For information about the compatibility of rich edit versions w ith the various 
+
+system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                       Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                       Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 716-----------------------
+
+    Header 
+
+                                                                                                             Win 
+
+                                                                                                             user. 
+
+                                                                                                             h 
+
+                                                                                                             (incl 
+
+                                                                                                             ude 
+
+                                                                                                             Win 
+
+                                                                                                             dow 
+
+                                                                                                             s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+EE 
+
+XX 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+FF 
+
+RR 
+
+OO 
+
+MM 
+
+CC 
+
+HH 
+
+AA 
+
+RR 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+II 
+
+NN 
+
+DD 
+
+EE 
+
+XX 
+
+
+----------------------- Page 717-----------------------
+
+
+----------------------- Page 718-----------------------
+
+        EM_LINEINDEX message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Gets the character index of the first character of a specified line in a multiline edit control. A character index is the 
+
+zero-based index of the character from the beginning of the edit control. You can send this message to either an 
+
+edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+        The zero-based line number. A value of -1 specifies the current line number (the line that contains the caret). 
+
+
+
+l                                                                                           This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is the character index of the line specified in the w Param parameter, or it is -1 if the specified line 
+
+number is greater than the number of lines in the edit control. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                      Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                      Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 719-----------------------
+
+   Header 
+
+                                                                                              Win 
+
+                                                                                              user. 
+
+                                                                                              h 
+
+                                                                                              (incl 
+
+                                                                                              ude 
+
+                                                                                              Win 
+
+                                                                                              dow 
+
+                                                                                              s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+FF 
+
+RR 
+
+OO 
+
+MM 
+
+CC 
+
+HH 
+
+AA 
+
+RR 
+
+
+----------------------- Page 720-----------------------
+
+        EM_LINELENGTH message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Retrieves the length, in characters, of a line in an edit control. You can send this message to either an edit control or 
+
+a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      The character index of a character in the line w hose length is to be retrieved. If this parameter is greater than 
+
+      the number of characters in the control, the return value is zero. 
+
+
+
+      This parameter can be -1. In this case, the message returns the number of unselected characters on lines 
+
+      containing selected characters. For example, if the selection extended from the fourth character of one line 
+
+      through the eighth character from the end of the next line, the return value would be  10 (three characters on 
+
+      the first line and seven on the next). 
+
+
+
+l                                                                                               This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+For multiline edit controls, the return value is the length, in TTCC HHAA RRs, of the line specified by the w Param parameter. 
+
+For ANSI text, this is the number of bytes; for Unicode text, this is the number of characters. It does not include the 
+
+carriage-return character at the end of the line. 
+
+
+
+For single-line edit controls, the return value is the length, in TTCC HHAA RRs, of the text in the edit control. 
+
+
+
+If w Param is greater than the number of characters in the control, the return value is zero. 
+
+
+
+Remarks 
+
+
+
+Use the EEMM__ LLIINNEEIINNDDEEXX message to retrieve a character index for a given line number w ithin a multiline edit 
+
+control. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+----------------------- Page 721-----------------------
+
+    Minimum supported client                                                                       Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                       Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                   Win 
+
+                                                                                                   user. 
+
+                                                                                                   h 
+
+                                                                                                   (incl 
+
+                                                                                                   ude 
+
+                                                                                                   Win 
+
+                                                                                                   dow 
+
+                                                                                                   s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+II 
+
+NN 
+
+DD 
+
+EE 
+
+XX 
+
+
+----------------------- Page 722-----------------------
+
+        EM_LINESCROLL message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Scrolls the text in a multiline edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                         EEddiitt  ccoonnttrroollss:: The number of characters to scroll horizontally. 
+
+P 
+
+                                                          RRiicchh  eeddiitt  ccoonnttrroollss:: This parameter is not used; it must be zero. 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                     The number of lines to scroll vertically. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+If the message is sent to a multiline edit control, the return value is TTRRUUEE. 
+
+
+
+If the message is sent to a single-line edit control, the return value is FFAA LLSS EE. 
+
+
+
+Remarks 
+
+
+
+The control does not scroll vertically past the last line of text in the edit control. If the current line plus the number 
+
+of lines specified by the lParam parameter exceeds the total number of lines in the edit control, the value is adj usted 
+
+so that the last line of the edit control is scrolled to the top of the edit-control w indow. 
+
+
+
+EEddiitt  ccoonnttrroollss:: The EEMM__ LLIINNEESSCC RROOLLLL message scrolls the text vertically or horizontally in a multiline edit control. 
+
+The EEMM__ LLIINNEESSCC RROOLLLL message can be used to scroll horizontally past the last character of any line. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. The EEMM__ LLIINNEESSCC RROOLLLL message scrolls the text vertically 
+
+in a multiline edit control. For information about the compatibility of rich edit versions w ith the various system 
+
+versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                           Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                           Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 723-----------------------
+
+Header 
+
+                                                                       Win 
+
+                                                                       user. 
+
+                                                                       h 
+
+                                                                       (incl 
+
+                                                                       ude 
+
+                                                                       Win 
+
+                                                                       dow 
+
+                                                                       s.h) 
+
+
+----------------------- Page 724-----------------------
+
+        EM_NOSETFOCUS message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+[Intended for internal use; not recommended for use in applications. This message may not be supported in future 
+
+versions of Windows.] 
+
+
+
+Prevents a single-line edit control from receiv ing key board focus. You can send this message explicitly or by using 
+
+the EEddiitt__ NNooSSeettFFooccuuss macro. 
+
+
+
+Parameters 
+
+
+
+w                                                                                               Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                               Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is not used. 
+
+
+
+Security Considerations 
+
+
+
+Using this message might compromise the security of your program. 
+
+
+
+Remarks 
+
+
+
+This message is ignored if the edit control is not a single-line edit control. 
+
+
+
+After this message is sent, the effect is permanent. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                      Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                      Windows Server 2008  [desktop apps only] 
+
+
+----------------------- Page 725-----------------------
+
+    Header 
+
+                                                                                                                   Co 
+
+                                                                                                                   mm 
+
+                                                                                                                   ctrl. 
+
+                                                                                                                   h 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+dd 
+
+ii 
+
+tt 
+
+__ 
+
+NN 
+
+oo 
+
+SS 
+
+ee 
+
+tt 
+
+FF 
+
+oo 
+
+cc 
+
+uu 
+
+ss 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+TT 
+
+AA 
+
+KK 
+
+EE 
+
+FF 
+
+OO 
+
+CC 
+
+UU 
+
+SS 
+
+
+----------------------- Page 726-----------------------
+
+         EM_POSFROMCHAR message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Retrieves the client area coordinates of a specified character in an edit control. You can send this message to either 
+
+an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       RRiicchh   EEddiitt   11..00  aanndd  33..00:: A pointer to a PPOOIINNTTLL structure that receives the client area coordinates of the 
+
+       character. The coordinates are in screen units and are relative to the upper-left corner of the control's client 
+
+       area. 
+
+
+
+       EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt  22..00:: The zero-based index of the character. 
+
+
+
+l                                                              RRiicchh   EEddiitt   11..00  aanndd  33..00:: The zero-based index of the character. 
+
+P 
+
+                                                               EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt  22..00:: This parameter is not used. 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+RRiicchh   EEddiitt   11..00  aanndd  33..00:: The return value is not used. 
+
+
+
+EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt  22..00:: The return value contains the client area coordinates of the character. The 
+
+LLOOWWOORRDD contains the horizontal coordinate and the HHIIWWOORRDD contains the vertical coordinate. 
+
+
+
+Remarks 
+
+
+
+A returned coordinate can be a negative value if the specified character is not displayed in the edit control's client 
+
+area. The coordinates are truncated to integer values. 
+
+
+
+If the character is a line delimiter, the returned coordinates indicate a point j ust beyond the last v isible character in 
+
+the line. If the specified index is greater than the index of the last character in the control, the control returns -1. 
+
+
+
+RRiicchh   EEddiitt  33..00  aanndd   llaatteerr :: For backward compatibility, Microsoft Rich Edit 3.0 supports the sy ntax used by 
+
+Microsoft Rich Edit 2.0. If Microsoft Rich Edit 3.0 detects that w Param is not a valid PPOOIINNTTLL pointer, it assumes the 
+
+message was sent using the Microsoft Rich Edit 2.0 sy ntax. In this case, it uses the return value to return the 
+
+coordinates. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+----------------------- Page 727-----------------------
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                           Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                           Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                       Win 
+
+                                                                                                       user. 
+
+                                                                                                       h 
+
+                                                                                                       (incl 
+
+                                                                                                       ude 
+
+                                                                                                       Win 
+
+                                                                                                       dow 
+
+                                                                                                       s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+CC 
+
+HH 
+
+AA 
+
+RR 
+
+FF 
+
+RR 
+
+OO 
+
+MM 
+
+PP 
+
+OO 
+
+SS 
+
+
+
+OO 
+
+tt 
+
+hh 
+
+ee 
+
+rr 
+
+RR 
+
+ee 
+
+ss 
+
+oo 
+
+
+----------------------- Page 728-----------------------
+
+ uu 
+
+ rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+
+ PP 
+
+OO 
+
+ II 
+
+ NN 
+
+TT 
+
+ LL 
+
+
+----------------------- Page 729-----------------------
+
+        EM_REPLACESEL message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Replaces the selected text in an edit control or a rich edit control w ith the specified text. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      Specifies w hether the replacement operation can be undone. If this is TTRRUUEE, the operation can be undone. If 
+
+      this is FFAA LLSS EE , the operation cannot be undone. 
+
+
+
+l                                                 A pointer to a null-terminated string containing the replacement text. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+Use the EEMM__ RREEPPLLAACC EESS EELL message to replace only a portion of the text in an edit control. To replace all of the text, 
+
+use the WW MM__ SS EETTTTEEXXTT message. 
+
+
+
+If there is no selection, the replacement text is inserted at the caret. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+In a rich edit control, the replacement text takes the formatting of the character at the caret or, if there is a selection, 
+
+of the first character in the selection. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 730-----------------------
+
+   Header 
+
+                                                                                          Win 
+
+                                                                                          user. 
+
+                                                                                          h 
+
+                                                                                          (incl 
+
+                                                                                          ude 
+
+                                                                                          Win 
+
+                                                                                          dow 
+
+                                                                                          s.h) 
+
+
+
+See also 
+
+
+
+WW 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+TT 
+
+EE 
+
+XX 
+
+TT 
+
+
+----------------------- Page 731-----------------------
+
+           EM_SCROLL message 
+
+
+
+          2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Scrolls the text vertically in a multiline edit control. This message is equivalent to sending a WW MM__VV SSCC RROOLLLL 
+
+message to the edit control. You can send this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                            The action the scroll bar is to take. This parameter can be one of the follow ing values. 
+
+P 
+
+a                                               VVAA LL UUEE                                                     MM EEAA NN IINNGG 
+
+r 
+
+                                                                                                                 Scrolls down one line. 
+
+a 
+
+                                                SSBB__ 
+
+m                                               LLIINN 
+
+                                                EEDD 
+
+                                                OOWW 
+
+                                                NN 
+
+
+
+                                                                                                                 Scrolls up one line. 
+
+                                                SSBB__ 
+
+                                                LLIINN 
+
+                                                EEUUPP 
+
+
+
+                                                                                                                 Scrolls down one page. 
+
+                                                SSBB__ 
+
+                                                PPAA 
+
+                                                GG EE 
+
+                                                DDOO 
+
+                                                WW NN 
+
+
+
+                                                                                                                 Scrolls up one page. 
+
+                                                SSBB__ 
+
+                                                PPAA 
+
+                                                GG EE 
+
+                                                UUPP 
+
+
+
+l                                                                                                                                This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+If the message is successful, the HHIIWWOORRDD of the return value is TTRRUUEE, and the LLOOWWOORRDD is the number of lines 
+
+that the command scrolls. The number returned may not be the same as the actual number of lines scrolled if the 
+
+scrolling moves to the beginning or the end of the text. If the w Param parameter specifies an invalid value, the 
+
+return value is FFAA LLSS EE. 
+
+
+----------------------- Page 732-----------------------
+
+ Remarks 
+
+
+
+To scroll to a specific line or character position, use the EEMM__ LLIINNEESSCC RROOLLLL message. To scroll the caret into v iew, 
+
+use the EEMM__ SSCC RROOLLLLCCAA RREETT message. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                        Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                        Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                    Win 
+
+                                                                                                    user. 
+
+                                                                                                    h 
+
+                                                                                                    (incl 
+
+                                                                                                    ude 
+
+                                                                                                    Win 
+
+                                                                                                    dow 
+
+                                                                                                    s.h) 
+
+
+
+See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+SS 
+
+CC 
+
+RR 
+
+OO 
+
+LL 
+
+LL 
+
+
+
+EE 
+
+MM 
+
+
+----------------------- Page 733-----------------------
+
+__ 
+
+ SS 
+
+CC 
+
+ RR 
+
+OO 
+
+ LL 
+
+ LL 
+
+CC 
+
+AA 
+
+ RR 
+
+ EE 
+
+TT 
+
+
+
+WW 
+
+ MM 
+
+__ 
+
+VV 
+
+ SS 
+
+CC 
+
+ RR 
+
+OO 
+
+ LL 
+
+ LL 
+
+
+----------------------- Page 734-----------------------
+
+        EM_SCROLLCARET message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Scrolls the caret into v iew in an edit control. You can send this message to either an edit control or a rich edit 
+
+control. 
+
+
+
+Parameters 
+
+
+
+w                                                                    This parameter is reserved. It should be set to zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                    This parameter is reserved. It should be set to zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is not meaningful. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+
+  Header 
+
+                                                                  Win 
+
+                                                                  user. 
+
+                                                                  h 
+
+                                                                  (incl 
+
+                                                                  ude 
+
+                                                                  Win 
+
+                                                                  dow 
+
+                                                                  s.h) 
+
+
+----------------------- Page 735-----------------------
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+SS 
+
+CC 
+
+RR 
+
+OO 
+
+LL 
+
+LL 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+CC 
+
+RR 
+
+OO 
+
+LL 
+
+LL 
+
+
+
+WW 
+
+MM 
+
+__ 
+
+VV 
+
+SS 
+
+CC 
+
+RR 
+
+OO 
+
+LL 
+
+LL 
+
+
+----------------------- Page 736-----------------------
+
+         EM_SETCUEBANNER message 
+
+
+
+         2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the textual cue, or tip, that is displayed by the edit control to prompt the user for information. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+[ 
+
+i 
+
+n 
+
+] 
+
+
+
+       TTRRUUEE if the cue banner should show even w hen the edit control has focus; otherw ise, FFAA LLSS EE. FFAA LLSS EE is the 
+
+       default behav ior the cue banner disappears w hen the user clicks in the control. 
+
+
+
+l                                           A pointer to a Unicode string that contains the text to display as the textual cue. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+[ 
+
+i 
+
+n 
+
+] 
+
+
+
+Return value 
+
+
+
+If the message succeeds, it returns TTRRUUEE. Otherw ise it returns FFAA LLSS EE. 
+
+
+
+Remarks 
+
+
+
+An edit control that is used to begin a search may display "Enter search here" in gray text as a textual cue. W hen the 
+
+user clicks the text, the text goes away and the user can ty pe. 
+
+
+
+You cannot set a cue banner on a multiline edit control or on a rich edit control. 
+
+
+
+   NNOOTTEE 
+
+   To use this API, you must provide a manifest specifying Comclt32.dll version 6.0.  For more information on manifests, see 
+
+   Enabling Visual Styles. 
+
+
+----------------------- Page 737-----------------------
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                                    Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                                    Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                                 Co 
+
+                                                                                                                 mm 
+
+                                                                                                                 ctrl. 
+
+                                                                                                                 h 
+
+
+
+ See also 
+
+
+
+EE 
+
+dd 
+
+ii 
+
+tt 
+
+__ 
+
+SS 
+
+ee 
+
+tt 
+
+CC 
+
+uu 
+
+ee 
+
+BB 
+
+aa 
+
+nn 
+
+nn 
+
+ee 
+
+rr 
+
+TT 
+
+ee 
+
+xx 
+
+tt 
+
+
+----------------------- Page 738-----------------------
+
+        EM_SETHANDLE message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the handle of the memory that w ill be used by a multiline edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      A handle to the memory buffer the edit control uses to store the currently displayed text instead of allocating 
+
+      its ow n memory. If necessary, the control reallocates this memory. 
+
+
+
+l                                                                                            This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+Before an application sets a new memory handle, it should send an EEMM__ GG EETTHHAA NNDDLLEE message to retrieve the 
+
+handle of the current memory buffer and should free that memory. 
+
+
+
+An edit control automatically reallocates the given buffer w henever it needs additional space for text, or it removes 
+
+enough text so that additional space is no longer needed. 
+
+
+
+Sending an EEMM__ SS EETTHHAA NNDDLLEE message clears the undo buffer (EEMM__ CCAA NNUUNNDDOO returns zero) and the internal 
+
+modification flag (EEMM__ GG EETTMMOODDIIFFYY returns zero). The edit control w indow is redraw n. 
+
+
+
+RRiicchh   EEddiitt:: The EEMM__ SS EETTHHAA NNDDLLEE message is not supported. Rich edit controls do not store text as a simple array 
+
+of characters. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                       Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                       Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 739-----------------------
+
+    Header 
+
+                                                                                                     Win 
+
+                                                                                                      user. 
+
+                                                                                                      h 
+
+                                                                                                      (incl 
+
+                                                                                                      ude 
+
+                                                                                                     Win 
+
+                                                                                                      dow 
+
+                                                                                                      s.h) 
+
+
+
+See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+CC 
+
+AA 
+
+NN 
+
+UU 
+
+NN 
+
+DD 
+
+OO 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+HH 
+
+AA 
+
+NN 
+
+DD 
+
+LL 
+
+EE 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+
+----------------------- Page 740-----------------------
+
+ MM 
+
+OO 
+
+ DD 
+
+ II 
+
+ FF 
+
+YY 
+
+
+----------------------- Page 741-----------------------
+
+          EM_SETHILITE message 
+
+
+
+         2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+This message is not implemented. 
+
+
+
+  
+
+
+
+  
+
+
+----------------------- Page 742-----------------------
+
+           EM_SETIMESTATUS message 
+
+
+
+           2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the status flags that determine how an edit control interacts w ith the Input Method Editor (IME). 
+
+
+
+ Parameters 
+
+
+
+w                                                                        The ty pe of status to set. This parameter can be the follow ing value. 
+
+P 
+
+a                                                                           VVAA LL UUEE                                          MM EEAA NN IINNGG 
+
+r 
+
+a                                                                                                                                 Sets behavior for the handling 
+
+                                                                             EEMM 
+
+                                                                                                                                  composition string. 
+
+m                                                                            SSIISS__ 
+
+                                                                            CCOO 
+
+                                                                             MMPP 
+
+                                                                            OOSSII 
+
+                                                                            TTIIOO 
+
+                                                                             NNSSTT 
+
+                                                                             RRIINN 
+
+                                                                            GG 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+         Data specific to the status ty pe. If w Param is EEMMSS IISS__ CCOOMMPPOOSS IITTIIOONNSSTTRRIINNGG, this parameter can be one or 
+
+         more of the follow ing values. 
+
+
+
+            VVAA LL UUEE                                                                          MM EEAA NN IINNGG 
+
+
+
+                                                                                                  If this flag is set, the edit control hooks the 
+
+            EEIIMM 
+
+                                                                                                  WW MM__ IIMMEE__CCOO MMPPOOSSIITTIIOO NN message with lParam set to 
+
+            EESS__                                                                                GCS_ RESULTSTR and returns the result string immediately. 
+
+            GG EETT 
+
+                                                                                                  If this flag is not set, the edit control passes the 
+
+            CCOO 
+
+                                                                                                  WW MM__ IIMMEE__CCOO MMPPOOSSIITTIIOO NN message to the default 
+
+            MMPP 
+
+                                                                                                  window procedure and handles the result string from the 
+
+            SSTTRR 
+
+                                                                                                  WW MM__CC HHAA RR message; this is the default behavior of the 
+
+            AATTOO 
+
+                                                                                                  edit control. 
+
+            NNCC 
+
+            EE 
+
+
+----------------------- Page 743-----------------------
+
+            VVAA LL UUEE                                                                          MM EEAA NN IINNGG 
+
+
+
+                                                                                                   If this flag is set, the edit control cancels the composition 
+
+            EEIIMM 
+
+                                                                                                   string when it receives the WW MM__ SSEETTFFOOCCUUSS message.  If 
+
+            EESS__                                                                                this flag is not set, the edit control does not cancel the 
+
+            CCAA 
+
+                                                                                                   composition string; this is the default behavior of the edit 
+
+            NNCC 
+
+                                                                                                   control. 
+
+            EELLCC 
+
+            OO MM 
+
+            PPSSTT 
+
+            RRIINN 
+
+            FFOO 
+
+            CCUU 
+
+            SS 
+
+
+
+                                                                                                   If this flag is set, the edit control completes the 
+
+            EEIIMM 
+
+                                                                                                   composition string upon receiving the WW MM__ KKIILLLLFFOOCCUUSS 
+
+            EESS__                                                                                 message.  If this flag is not set, the edit control does not 
+
+            CCOO 
+
+                                                                                                   complete the composition string; this is the default 
+
+            MMPP 
+
+                                                                                                   behavior of the edit control. 
+
+            LLEETT 
+
+            EECC 
+
+            OO MM 
+
+            PPSSTT 
+
+            RRKKII 
+
+            LLLLFF 
+
+            OOCC 
+
+            UUSS 
+
+
+
+Return value 
+
+
+
+Returns the prev ious value of the lParam parameter. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: The EEMM__ SS EETTIIMMEESSTTAATTUUSS message is not supported. 
+
+
+
+Requirements 
+
+
+
+   Minimum supported client                                                                   Windows Vista  [desktop apps only] 
+
+
+
+   Minimum supported server                                                                   Windows Server 2003  [desktop apps only] 
+
+
+
+   Header 
+
+                                                                                              Win 
+
+                                                                                              user. 
+
+                                                                                              h 
+
+                                                                                              (incl 
+
+                                                                                              ude 
+
+                                                                                              Win 
+
+                                                                                              dow 
+
+                                                                                              s.h) 
+
+
+
+See also 
+
+
+----------------------- Page 744-----------------------
+
+ EE 
+
+ MM 
+
+__ 
+
+GG 
+
+ EE 
+
+TT 
+
+ II 
+
+ MM 
+
+ EE 
+
+ SS 
+
+TT 
+
+AA 
+
+TT 
+
+ UU 
+
+ SS 
+
+
+----------------------- Page 745-----------------------
+
+        EM_SETLIMITTEXT message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the text limit of an edit control. The text limit is the maximum amount of text, in TTCC HHAA RRs, that the user can ty pe 
+
+into the edit control. You can send this message to either an edit control or a rich edit control. 
+
+
+
+For edit controls and Microsoft Rich Edit  1.0, bytes are used. For Microsoft Rich Edit 2.0 and later, characters are 
+
+used. 
+
+
+
+The EEMM__ SS EETTLLIIMMIITTTTEEXXTT message is identical to the EEMM__ LLIIMMIITTTTEEXXTT message. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       The maximum number of TTCC HHAA RRs the user can enter. For ANSI text, this is the number of bytes; for Unicode 
+
+       text, this is the number of characters. This number does not include the terminating null character. 
+
+
+
+       RRiicchh  eeddiitt  ccoonnttrroollss:: If this parameter is zero, the text length is set to 64,000 characters. 
+
+
+
+       If this parameter is zero, the text length is set to 0x7FFFFFFE characters for single-line edit controls or  1 for 
+
+       multiline edit controls. 
+
+
+
+l                                                                                                   This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+The EEMM__ SS EETTLLIIMMIITTTTEEXXTT message limits only the text the user can enter. It does not affect any text already in the 
+
+edit control w hen the message is sent, nor does it affect the length of the text copied to the edit control by the 
+
+WW MM__ SS EETTTTEEXXTT message. If an application uses the WW MM__ SS EETTTTEEXXTT message to place more text into an edit control 
+
+than is specified in the EEMM__ SS EETTLLIIMMIITTTTEEXXTT message, the user can edit the entire contents of the edit control. 
+
+
+
+Before EEMM__ SS EETTLLIIMMIITTTTEEXXTT is called, the default limit for the amount of text a user can enter in an edit control is 
+
+32,767 characters. 
+
+
+
+For single-line edit controls, the text limit is either 0x7FFFFFFE bytes or the value of the w Param parameter, 
+
+w hichever is smaller. For multiline edit controls, this value is either  1 bytes or the value of the w Param parameter, 
+
+
+----------------------- Page 746-----------------------
+
+w hichever is smaller. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. Use the message EEMM__ EEXX LLIIMMIITTTTEEXXTT for text length 
+
+values greater than 64,000. For information about the compatibility of rich edit versions w ith the various system 
+
+versions, see About Rich Edit Controls. 
+
+
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                     Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                     Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                 Win 
+
+                                                                                                 user. 
+
+                                                                                                 h 
+
+                                                                                                 (incl 
+
+                                                                                                 ude 
+
+                                                                                                 Win 
+
+                                                                                                 dow 
+
+                                                                                                 s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+LL 
+
+II 
+
+MM 
+
+II 
+
+TT 
+
+TT 
+
+EE 
+
+XX 
+
+TT 
+
+
+----------------------- Page 747-----------------------
+
+           EM_SETMARGINS message 
+
+
+
+           2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the w idths of the left and right margins for an edit control. The message redraws the control to reflect the new 
+
+margins. You can send this message to either an edit control or a rich edit control. 
+
+
+
+ Parameters 
+
+
+
+w                                                       The margins to set. This parameter can be one or more of the follow ing values. 
+
+P 
+
+a                                                          VVAA LL UUEE                                                  MM EEAA NN IINNGG 
+
+r 
+
+a                                                                                                                        Sets the left margin. 
+
+                                                           EECC__ 
+
+m                                                          LLEEFF 
+
+                                                           TTMM 
+
+                                                           AA RR 
+
+                                                           GG IINN 
+
+
+
+                                                                                                                         Sets the right margin. 
+
+                                                           EECC__ 
+
+                                                           RRIIGG 
+
+                                                           HHTT 
+
+                                                           MMAA 
+
+                                                           RRGG II 
+
+                                                           NN 
+
+
+
+                                                                                                                         RRiicchh  eeddiitt  ccoonntt rroollss:: Sets the left and 
+
+                                                           EECC__                                                        right margins to a narrow width 
+
+                                                           UUSSEE 
+
+                                                                                                                         calculated using the text metrics of the 
+
+                                                           FFOO 
+
+                                                                                                                         control's current font.  If no font has been 
+
+                                                           NNTTII 
+
+                                                                                                                         set for the control, the margins are set to 
+
+                                                           NNFF 
+
+                                                                                                                         zero. The lParam parameter is ignored.  
+
+                                                           OO 
+
+                                                                                                                         EEddiitt  ccoonntt rroollss:: The EECC__ UUSSEEFFOO NNTTIINNFFOO 
+
+                                                                                                                         value cannot be used in the wParam 
+
+                                                                                                                         parameter.  It can only be used in the 
+
+                                                                                                                         lParam parameter. 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+         The LLOOWWOORRDD specifies the new w idth of the left margin, in pixels. This value is ignored if w Param does not 
+
+         include EECC__ LLEEFFTTMMAA RRGG IINN. 
+
+
+
+         EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt  33..00  aanndd   llaatteerr :: The LLOOWWOORRDD can specify the EECC__ UUSS EEFFOONNTTIINNFFOO value to 
+
+         set the left margin to a narrow w idth calculated using the text metrics of the control's current font. If no font 
+
+         has been set for the control, the margin is set to zero. 
+
+
+
+         The HHIIWWOORRDD specifies the new w idth of the right margin, in pixels. This value is ignored if w Param does not 
+
+
+----------------------- Page 748-----------------------
+
+        include EECC__ RRIIGG HHTTMMAA RRGG IINN. 
+
+
+
+        EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt  33..00  aanndd   llaatteerr :: The HHIIWWOORRDD can specify the EECC__ UUSS EEFFOONNTTIINNFFOO value to set 
+
+        the right margin to a narrow w idth calculated using the text metrics of the control's current font. If no font has 
+
+        been set for the control, the margin is set to zero. 
+
+
+
+ Return value 
+
+
+
+This message does not return a value. 
+
+
+
+ Remarks 
+
+
+
+EEddiitt  ccoonnttrroollss:: You cannot use EECC__ UUSS EEFFOONNTTIINNFFOO in the w Param parameter, but you can use it in the lParam 
+
+parameter. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. All rich edit versions support the use of 
+
+EECC__ UUSS EEFFOONNTTIINNFFOO in the w Param parameter. However, only Microsoft Rich Edit 3.0 and later support the use of 
+
+EECC__ UUSS EEFFOONNTTIINNFFOO in the lParam parameter. For information about the compatibility of rich edit versions w ith the 
+
+various system versions, see About Rich Edit Controls. 
+
+
+
+ Requirements 
+
+
+
+   Minimum supported client                                                          Windows Vista  [desktop apps only] 
+
+
+
+   Minimum supported server                                                          Windows Server 2003  [desktop apps only] 
+
+
+
+   Header 
+
+                                                                                     Win 
+
+                                                                                      user. 
+
+                                                                                      h 
+
+                                                                                      (incl 
+
+                                                                                      ude 
+
+                                                                                     Win 
+
+                                                                                      dow 
+
+                                                                                      s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+MM 
+
+AA 
+
+RR 
+
+GG 
+
+II 
+
+NN 
+
+SS 
+
+
+----------------------- Page 749-----------------------
+
+        EM_SETMODIFY message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets or clears the modification flag for an edit control. The modification flag indicates w hether the text w ithin the 
+
+edit control has been modified. You can send this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      The new value for the modification flag. A value of TTRRUUEE indicates the text has been modified, and a value of 
+
+      FFAA LLSS EE indicates it has not been modified. 
+
+
+
+l                                                                                               This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+The system automatically clears the modification flag to zero w hen the control is created. If the user changes the 
+
+control's text, the system sets the flag to nonzero. You can send the EEMM__ GG EETTMMOODDIIFFYY message to the edit control 
+
+to retrieve the current state of the flag. 
+
+
+
+RRiicchh   EEddiitt   11..00:: Obj ects created w ithout the RREEOO__ DDYY NNAA MMIICCSS IIZZ EE flag w ill lock in their extents w hen the modify 
+
+flag is set to FFAA LLSS EE. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                         Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                         Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 750-----------------------
+
+    Header 
+
+                                                                                                           Win 
+
+                                                                                                           user. 
+
+                                                                                                           h 
+
+                                                                                                           (incl 
+
+                                                                                                           ude 
+
+                                                                                                           Win 
+
+                                                                                                           dow 
+
+                                                                                                           s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+MM 
+
+OO 
+
+DD 
+
+II 
+
+FF 
+
+YY 
+
+
+
+RR 
+
+EE 
+
+OO 
+
+BB 
+
+JJ 
+
+EE 
+
+CC 
+
+TT 
+
+
+----------------------- Page 751-----------------------
+
+        EM_SETPASSWORDCHAR message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets or removes the password character for an edit control. W hen a password character is set, that character is 
+
+displayed in place of the characters ty ped by the user. You can send this message to either an edit control or a rich 
+
+edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      The character to be displayed in place of the characters ty ped by the user. If this parameter is zero, the control 
+
+       removes the current password character and displays the characters ty ped by the user. 
+
+
+
+l                                                                                               This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+W hen an edit control receives the EEMM__ SS EETTPPAASSSSWWOORRDDCC HHAA RR message, the control redraws all v isible characters 
+
+using the character specified by the w Param parameter. If w Param is zero, the control redraws all v isible characters 
+
+using the characters ty ped by the user. 
+
+
+
+If an edit control is created w ith the EESS__ PPAASSSSWWOORRDD sty le, the default password character is set to an asterisk (*). If 
+
+an edit control is created w ithout the EESS__ PPAASSSSWWOORRDD sty le, there is no password character. The EESS__ PPAASSSSWWOORRDD 
+
+sty le is removed if an EEMM__ SS EETTPPAASSSSWWOORRDDCC HHAA RR message is sent w ith the w Param parameter set to zero. 
+
+
+
+EEddiitt  ccoonnttrroollss:: Multiline edit controls do not support the password sty le or messages. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit 2.0 and later. Both single-line and multiline edit controls support the 
+
+password sty le and messages. For information about the compatibility of rich edit versions w ith the various system 
+
+versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+----------------------- Page 752-----------------------
+
+   Minimum supported client                                                               Windows Vista  [desktop apps only] 
+
+
+
+   Minimum supported server                                                               Windows Server 2003  [desktop apps only] 
+
+
+
+   Header 
+
+                                                                                          Win 
+
+                                                                                          user. 
+
+                                                                                          h 
+
+                                                                                          (incl 
+
+                                                                                          ude 
+
+                                                                                          Win 
+
+                                                                                          dow 
+
+                                                                                          s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+PP 
+
+AA 
+
+SS 
+
+SS 
+
+WW 
+
+OO 
+
+RR 
+
+DD 
+
+CC 
+
+HH 
+
+AA 
+
+RR 
+
+
+----------------------- Page 753-----------------------
+
+        EM_SETREADONLY message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets or removes the read-only sty le (EESS__ RREEAA DDOONNLLYY) of an edit control. You can send this message to either an 
+
+edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      Specifies w hether to set or remove the EESS__ RREEAA DDOONNLLYY sty le. A value of TTRRUUEE sets the EESS__ RREEAA DDOONNLLYY sty le; 
+
+      a value of FFAA LLSS EE removes the EESS__ RREEAA DDOONNLLYY sty le. 
+
+
+
+l                                                                                               This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+If the operation succeeds, the return value is nonzero. 
+
+
+
+If the operation fails, the return value is zero. 
+
+
+
+Remarks 
+
+
+
+W hen an edit control has the EESS__ RREEAA DDOONNLLYY sty le, the user cannot change the text w ithin the edit control. 
+
+
+
+To determine w hether an edit control has the EESS__ RREEAA DDOONNLLYY sty le, use the GGeettWW iinnddooww LLoonngg function w ith the 
+
+GW L_STY LE flag. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                         Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                         Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 754-----------------------
+
+    Header 
+
+                                                                                                  Win 
+
+                                                                                                  user. 
+
+                                                                                                  h 
+
+                                                                                                  (incl 
+
+                                                                                                  ude 
+
+                                                                                                  Win 
+
+                                                                                                  dow 
+
+                                                                                                  s.h) 
+
+
+
+See also 
+
+
+
+GG 
+
+ee 
+
+tt 
+
+WW 
+
+ii 
+
+nn 
+
+dd 
+
+oo 
+
+ww 
+
+LL 
+
+oo 
+
+nn 
+
+gg 
+
+
+----------------------- Page 755-----------------------
+
+         EM_SETRECT message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the formatting rectangle of a multiline edit control. The formatting rectangle is the limiting rectangle into 
+
+w hich the control draws the text. The limiting rectangle is independent of the size of the edit control w indow. 
+
+
+
+This message is processed only by multiline edit controls. You can send this message to either an edit control or a 
+
+rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       RRiicchh   EEddiitt  22..00  aanndd   llaatteerr :: Indicates w hether lParam specifies absolute or relative coordinates. A value of zero 
+
+       indicates absolute coordinates. A value of  1 indicates offsets relative to the current formatting rectangle. (The 
+
+       offsets can be positive or negative.) 
+
+
+
+       EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt   11..00:: This parameter is not used and must be zero. 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       A pointer to a RREECCTT structure that specifies the new dimensions of the rectangle. If this parameter is NNUULLLL, 
+
+       the formatting rectangle is set to its default values. 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+Setting lParam to NNUULLLL has no effect if a touch dev ice is installed, or if EEMM__ SS EETTRREECCTT is sent from a thread that has 
+
+a hook installed (see SSeettWW iinnddooww ss HHooookkEExx). In these cases, lParam should contain a valid pointer to a RREECCTT 
+
+structure. 
+
+
+
+The EEMM__ SS EETTRREECCTT message causes the text of the edit control to be redraw n. To change the size of the formatting 
+
+rectangle w ithout redraw ing the text, use the EEMM__ SS EETTRREECCTTNNPP message. 
+
+
+
+W hen an edit control is first created, the formatting rectangle is set to a default size. You can use the EEMM__ SS EETTRREECCTT 
+
+message to make the formatting rectangle larger or smaller than the edit control w indow. 
+
+
+
+If the edit control does not have a horizontal scroll bar, and the formatting rectangle is set to be larger than the edit 
+
+
+----------------------- Page 756-----------------------
+
+control w indow, lines of text exceeding the w idth of the edit control w indow (but smaller than the w idth of the 
+
+formatting rectangle) are clipped instead of w rapped. 
+
+
+
+If the edit control contains a border, the formatting rectangle is reduced by the size of the border. If you are 
+
+adj usting the rectangle returned by an EEMM__ GG EETTRREECCTT message, you must remove the size of the border before 
+
+using the rectangle w ith the EEMM__ SS EETTRREECCTT message. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. The formatting rectangle does not include the selection 
+
+bar, w hich is an unmarked area to the left of each paragraph. W hen the user clicks in the selection bar, the 
+
+corresponding line is selected. For information about the compatibility of rich edit versions w ith the various system 
+
+versions, see About Rich Edit Controls. 
+
+
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                   Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                   Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                               Win 
+
+                                                                                               user. 
+
+                                                                                               h 
+
+                                                                                               (incl 
+
+                                                                                               ude 
+
+                                                                                               Win 
+
+                                                                                               dow 
+
+                                                                                               s.h) 
+
+
+
+See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+RR 
+
+EE 
+
+CC 
+
+TT 
+
+
+
+EE 
+
+MM 
+
+
+----------------------- Page 757-----------------------
+
+__ 
+
+ SS 
+
+ EE 
+
+TT 
+
+ RR 
+
+ EE 
+
+ CC 
+
+TT 
+
+ NN 
+
+ PP 
+
+
+
+ OO 
+
+tt 
+
+ hh 
+
+ ee 
+
+ rr 
+
+ RR 
+
+ ee 
+
+ ss 
+
+ oo 
+
+ uu 
+
+ rr 
+
+ cc 
+
+ ee 
+
+ ss 
+
+
+
+ RR 
+
+ EE 
+
+ CC 
+
+TT 
+
+
+----------------------- Page 758-----------------------
+
+        EM_SETRECTNP message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Sets the formatting rectangle of a multiline edit control. The EEMM__ SS EETTRREECCTTNNPP message is identical to the 
+
+EEMM__ SS EETTRREECCTT message, except that EEMM__ SS EETTRREECCTTNNPP does not redraw the edit control w indow. 
+
+
+
+The formatting rectangle is the limiting rectangle into w hich the control draws the text. The limiting rectangle is 
+
+independent of the size of the edit control w indow. 
+
+
+
+This message is processed only by multiline edit controls. You can send this message to either an edit control or a 
+
+rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       RRiicchh   EEddiitt  33..00  aanndd   llaatteerr :: Indicates w hether the new rectangle contains absolute or relative coordinates. A 
+
+      value of zero indicates absolute coordinates. A value of  1 indicates offsets relative to the current formatting 
+
+       rectangle. (The offsets can be positive or negative.) 
+
+
+
+       EEddiitt  ccoonnttrroollss:: This parameter is not used and must be zero. 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      A pointer to a RREECCTT structure that specifies the new dimensions of the rectangle. If this parameter is NNUULLLL, 
+
+      the formatting rectangle is set to its default values. 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit 3.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+----------------------- Page 759-----------------------
+
+    Minimum supported client                                                                                  Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                                  Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                              Win 
+
+                                                                                                              user. 
+
+                                                                                                              h 
+
+                                                                                                              (incl 
+
+                                                                                                              ude 
+
+                                                                                                              Win 
+
+                                                                                                              dow 
+
+                                                                                                              s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+SS 
+
+EE 
+
+TT 
+
+RR 
+
+EE 
+
+CC 
+
+TT 
+
+
+
+OO 
+
+tt 
+
+hh 
+
+ee 
+
+rr 
+
+RR 
+
+ee 
+
+ss 
+
+oo 
+
+uu 
+
+rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+----------------------- Page 760-----------------------
+
+ RR 
+
+ EE 
+
+CC 
+
+TT 
+
+
+----------------------- Page 761-----------------------
+
+        EM_SETSEL message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Selects a range of characters in an edit control. You can send this message to either an edit control or a rich edit 
+
+control. 
+
+
+
+Parameters 
+
+
+
+w                                                                          The starting character position of the selection. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                           The ending character position of the selection. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+The start value can be greater than the end value. The lower of the two values specifies the character position of the 
+
+first character in the selection. The higher value specifies the position of the first character beyond the selection. 
+
+
+
+The start value is the anchor point of the selection, and the end value is the active end. If the user uses the SHIFT 
+
+key to adj ust the size of the selection, the active end can move but the anchor point remains the same. 
+
+
+
+If the start is 0 and the end is -1, all the text in the edit control is selected. If the start is -1, any current selection is 
+
+deselected. 
+
+
+
+EEddiitt  ccoonnttrroollss:: The control displays a flashing caret at the end position regardless of the relative values of start and 
+
+end. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+If the edit control has the EESS__ NNOOHHIIDDEESS EELL sty le, the selected text is highlighted regardless of w hether the control 
+
+has focus. Without the EESS__ NNOOHHIIDDEESS EELL sty le, the selected text is highlighted only w hen the edit control has the 
+
+focus. 
+
+
+
+Requirements 
+
+
+----------------------- Page 762-----------------------
+
+    Minimum supported client                                                                              Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                              Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                          Win 
+
+                                                                                                          user. 
+
+                                                                                                          h 
+
+                                                                                                          (incl 
+
+                                                                                                          ude 
+
+                                                                                                          Win 
+
+                                                                                                          dow 
+
+                                                                                                          s.h) 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+GG 
+
+EE 
+
+TT 
+
+SS 
+
+EE 
+
+LL 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+RR 
+
+EE 
+
+PP 
+
+LL 
+
+AA 
+
+CC 
+
+EE 
+
+SS 
+
+EE 
+
+LL 
+
+
+
+EE 
+
+MM 
+
+
+----------------------- Page 763-----------------------
+
+__ 
+
+ SS 
+
+CC 
+
+ RR 
+
+OO 
+
+ LL 
+
+ LL 
+
+CC 
+
+AA 
+
+ RR 
+
+ EE 
+
+TT 
+
+
+
+ EE 
+
+ MM 
+
+__ 
+
+ EE 
+
+XX 
+
+ SS 
+
+ EE 
+
+TT 
+
+ SS 
+
+ EE 
+
+ LL 
+
+
+----------------------- Page 764-----------------------
+
+         EM_SETTABSTOPS message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+The EEMM__ SS EETTTTAA BBSSTTOOPPSS message sets the tab stops in a multiline edit control. W hen text is copied to the control, 
+
+any tab character in the text causes space to be generated up to the next tab stop. 
+
+
+
+This message is processed only by multiline edit controls. You can send this message to either an edit control or a 
+
+rich edit control. 
+
+
+
+Parameters 
+
+
+
+w 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       The number of tab stops contained in the array. If this parameter is zero, the lParam parameter is ignored and 
+
+       default tab stops are set at every 32 dialog template units. If this parameter is  1, tab stops are set at every n 
+
+       dialog template units, w here n is the distance pointed to by the lParam parameter. If this parameter is greater 
+
+       than  1, lParam is a pointer to an array of tab stops. 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+       A pointer to an array of unsigned integers specifying the tab stops, in dialog template units. If the w Param 
+
+       parameter is  1, this parameter is a pointer to an unsigned integer containing the distance between all tab 
+
+       stops, in dialog template units. 
+
+
+
+Return value 
+
+
+
+If all the tabs are set, the return value is TTRRUUEE. 
+
+
+
+If all the tabs are not set, the return value is FFAA LLSS EE. 
+
+
+
+Remarks 
+
+
+
+The EEMM__ SS EETTTTAA BBSSTTOOPPSS message does not automatically redraw the edit control w indow. If the application is 
+
+changing the tab stops for text already in the edit control, it should call the IInnvv aalliiddaatteeRReecctt function to redraw the 
+
+edit control w indow. 
+
+
+
+The values specified in the array are in dialog template units, w hich are the dev ice-independent units used in dialog 
+
+box templates. To convert measurements from dialog template units to screen units (pixels), use the 
+
+MMaappDDiiaallooggRReecctt function. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit 3.0 and later. A rich edit control can have the maximum number of tab 
+
+
+----------------------- Page 765-----------------------
+
+stops specified by MAX_TAB_STOPS. For information about the compatibility of rich edit versions w ith the various 
+
+system versions, see About Rich Edit Controls. 
+
+
+
+ Requirements 
+
+
+
+    Minimum supported client                                                                                     Windows Vista  [desktop apps only] 
+
+
+
+    Minimum supported server                                                                                     Windows Server 2003  [desktop apps only] 
+
+
+
+    Header 
+
+                                                                                                                 Win 
+
+                                                                                                                  user. 
+
+                                                                                                                  h 
+
+                                                                                                                  (incl 
+
+                                                                                                                  ude 
+
+                                                                                                                 Win 
+
+                                                                                                                 dow 
+
+                                                                                                                  s.h) 
+
+
+
+ See also 
+
+
+
+OO 
+
+tt 
+
+hh 
+
+ee 
+
+rr 
+
+RR 
+
+ee 
+
+ss 
+
+oo 
+
+uu 
+
+rr 
+
+cc 
+
+ee 
+
+ss 
+
+
+
+II 
+
+nn 
+
+vv 
+
+aa 
+
+ll 
+
+ii 
+
+dd 
+
+aa 
+
+tt 
+
+ee 
+
+RR 
+
+ee 
+
+cc 
+
+tt 
+
+
+
+MM 
+
+
+----------------------- Page 766-----------------------
+
+aa 
+
+ pp 
+
+ DD 
+
+ ii 
+
+aa 
+
+ ll 
+
+oo 
+
+gg 
+
+ RR 
+
+ee 
+
+cc 
+
+tt 
+
+
+----------------------- Page 767-----------------------
+
+        EM_SETWORDBREAKPROC message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+Replaces an edit control's default Wordw rap function w ith an application-defined Wordw rap function. You can send 
+
+this message to either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                This parameter is not used. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+      The address of the application-defined Wordw rap function. For more information about breaking lines, see 
+
+      the description of the EditWordBreakProc callback function. 
+
+
+
+Return value 
+
+
+
+This message does not return a value. 
+
+
+
+Remarks 
+
+
+
+A Wordw rap function scans a text buffer that contains text to be sent to the screen, looking for the first word that 
+
+does not fit on the current screen line. The Wordw rap function places this word at the beginning of the next line on 
+
+the screen. 
+
+
+
+A Wordw rap function defines the point at w hich the system should break a line of text for multiline edit controls, 
+
+usually at a space character that separates two words. Either a multiline or a single-line edit control might call this 
+
+function w hen the user presses arrow keys in combination w ith the CTRL key to move the caret to the next word or 
+
+prev ious word. The default Wordw rap function breaks a line of text at a space character. The application-defined 
+
+function may define the Wordw rap to occur at a hy phen or a character other than the space character. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                          Windows Vista  [desktop apps only] 
+
+
+----------------------- Page 768-----------------------
+
+   Minimum supported server                                                                  Windows Server 2003  [desktop apps only] 
+
+
+
+   Header 
+
+                                                                                             Win 
+
+                                                                                             user. 
+
+                                                                                             h 
+
+                                                                                             (incl 
+
+                                                                                             ude 
+
+                                                                                             Win 
+
+                                                                                             dow 
+
+                                                                                             s.h) 
+
+
+
+See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+E 
+
+d 
+
+i 
+
+t 
+
+W 
+
+o 
+
+r 
+
+d 
+
+B 
+
+r 
+
+e 
+
+a 
+
+k 
+
+P 
+
+r 
+
+o 
+
+c 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+FF 
+
+MM 
+
+TT 
+
+LL 
+
+II 
+
+NN 
+
+EE 
+
+
+----------------------- Page 769-----------------------
+
+ SS 
+
+
+
+ EE 
+
+ MM 
+
+__ 
+
+GG 
+
+ EE 
+
+TT 
+
+WW 
+
+OO 
+
+ RR 
+
+ DD 
+
+ BB 
+
+ RR 
+
+ EE 
+
+AA 
+
+ KK 
+
+ PP 
+
+ RR 
+
+OO 
+
+CC 
+
+
+----------------------- Page 770-----------------------
+
+        EM_SHOWBALLOONTIP message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+The EEMM__ SS HHOOWW BBAA LLLLOOOONNTTIIPP message displays a balloon tip associated w ith an edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                 Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l             A pointer to an EEDDIITTBBAA LLLLOOOONNTTIIPP structure that contains information about the balloon tip to display. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+If the message succeeds, it returns TTRRUUEE. Otherw ise it returns FFAA LLSS EE. 
+
+
+
+Remarks 
+
+
+
+  NNOOTTEE 
+
+  To use this message, you must provide a manifest specifying Comclt32.dll version 6.0.  For more information on manifests, see 
+
+  Enabling Visual Styles. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                        Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                        Windows Server 2003  [desktop apps only] 
+
+
+
+  Header 
+
+                                                                  Co 
+
+                                                                  mm 
+
+                                                                  ctrl. 
+
+                                                                  h 
+
+
+
+See also 
+
+
+----------------------- Page 771-----------------------
+
+ RR 
+
+ ee 
+
+ff 
+
+ ee 
+
+ rr 
+
+ ee 
+
+ nn 
+
+ cc 
+
+ ee 
+
+
+
+ EE 
+
+ DD 
+
+ II 
+
+TT 
+
+ BB 
+
+AA 
+
+ LL 
+
+ LL 
+
+ OO 
+
+ OO 
+
+ NN 
+
+TT 
+
+ II 
+
+ PP 
+
+
+
+ EE 
+
+ dd 
+
+ ii 
+
+tt 
+
+__ 
+
+ SS 
+
+ hh 
+
+ oo 
+
+ww 
+
+ BB 
+
+ aa 
+
+ ll 
+
+ ll 
+
+ oo 
+
+ oo 
+
+ nn 
+
+TT 
+
+ ii 
+
+ pp 
+
+
+----------------------- Page 772-----------------------
+
+        EM_TAKEFOCUS message 
+
+
+
+       2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+[Intended for internal use; not recommended for use in applications. This message may not be supported in future 
+
+versions of Windows.] 
+
+
+
+Forces a single-line edit control to receive key board focus. You can send this message explicitly or by using the 
+
+EEddiitt__TTaakkeeFFooccuuss macro. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+The return value is not used. 
+
+
+
+Security Considerations 
+
+
+
+Using this message might compromise the security of your program. 
+
+
+
+Remarks 
+
+
+
+This message is ignored if the edit control is not a single-line edit control. 
+
+
+
+If the edit control prev iously received an EEMM__ NNOOSS EETTFFOOCCUUSS message, the edit control w ill appear to have the 
+
+focus w ithout actually hav ing it; otherw ise, the edit control w ill receive focus. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                       Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                       Windows Server 2008  [desktop apps only] 
+
+
+----------------------- Page 773-----------------------
+
+    Header 
+
+                                                                                                                  Co 
+
+                                                                                                                   mm 
+
+                                                                                                                  ctrl. 
+
+                                                                                                                   h 
+
+
+
+ See also 
+
+
+
+RR 
+
+ee 
+
+ff 
+
+ee 
+
+rr 
+
+ee 
+
+nn 
+
+cc 
+
+ee 
+
+
+
+EE 
+
+dd 
+
+ii 
+
+tt 
+
+__ 
+
+TT 
+
+aa 
+
+kk 
+
+ee 
+
+FF 
+
+oo 
+
+cc 
+
+uu 
+
+ss 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+NN 
+
+OO 
+
+SS 
+
+EE 
+
+TT 
+
+FF 
+
+OO 
+
+CC 
+
+UU 
+
+SS 
+
+
+----------------------- Page 774-----------------------
+
+        EM_UNDO message 
+
+
+
+        2/22/2020  • 2 minutes to read •  Edit Online 
+
+
+
+This message undoes the last edit control operation in the control's undo queue. You can send this message to 
+
+either an edit control or a rich edit control. 
+
+
+
+Parameters 
+
+
+
+w                                                                                                    Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+l                                                                                                    Not used; must be zero. 
+
+P 
+
+a 
+
+r 
+
+a 
+
+m 
+
+
+
+Return value 
+
+
+
+For a single-line edit control, the return value is always TTRRUUEE. 
+
+
+
+For a multiline edit control, the return value is TTRRUUEE if the undo operation is successful, or FFAA LLSS EE if the undo 
+
+operation fails. 
+
+
+
+Remarks 
+
+
+
+EEddiitt  ccoonnttrroollss  aanndd   RRiicchh   EEddiitt   11..00:: An undo operation can also be undone. For example, you can restore deleted 
+
+text w ith the first EEMM__ UUNNDDOO message, and remove the text again w ith a second EEMM__ UUNNDDOO message as long as 
+
+there is no intervening edit operation. 
+
+
+
+RRiicchh   EEddiitt  22..00  aanndd   llaatteerr :: The undo feature is multilevel so sending two EEMM__ UUNNDDOO messages w ill undo the last 
+
+two operations in the undo queue. To redo an operation, send the EEMM__ RREEDDOO message. 
+
+
+
+RRiicchh   EEddiitt:: Supported in Microsoft Rich Edit  1.0 and later. For information about the compatibility of rich edit 
+
+versions w ith the various system versions, see About Rich Edit Controls. 
+
+
+
+Requirements 
+
+
+
+  Minimum supported client                                          Windows Vista  [desktop apps only] 
+
+
+
+  Minimum supported server                                          Windows Server 2003  [desktop apps only] 
+
+
+----------------------- Page 775-----------------------
+
+   Header 
+
+                                                                                   Win 
+
+                                                                                   user. 
+
+                                                                                   h 
+
+                                                                                   (incl 
+
+                                                                                   ude 
+
+                                                                                   Win 
+
+                                                                                   dow 
+
+                                                                                   s.h) 
+
+
+
+See also 
+
+
+
+EE 
+
+MM 
+
+__ 
+
+CC 
+
+AA 
+
+NN 
+
+UU 
+
+NN 
+
+DD 
+
+OO 
