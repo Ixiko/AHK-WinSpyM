@@ -1,5 +1,5 @@
 ﻿; WinSpyM - Window Information Tool by Alguimist
-; (this is a modified version of WinSpy V1.0.3)
+; (this is a modified version of WinSpy V1.0.6)
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /* Description of modifications:
@@ -7,9 +7,10 @@
 	-    Main Window size is increased a little bit to show full informations. You can add own start size additions by changing
 		two variables inside this script: 'plusW' & 'plusH'.
 
-	-    Messages Tab:
+	-   Messages Tab:
 		The result will be displayed in decimal and hexadecimal.
 		Added a message description area for brief information.
+		In this tab it's possible to resize the window.
 
 	-   at script start WinSpy will be moved to center of primary screen in case it's outside of the visible area. This may happen
 		if you use different screen resolutions for example in different rdp-sessions.
@@ -44,8 +45,8 @@
 ; Variables
 ;----------------------------------------------------------------------------------------------------------------------------------------------;{
 	Global AppName      	:= "WinSpyM"
-			,  Version          	:= "1.0.5"
-			,  IniFile            	:= AppName . ".ini"
+			,  Version          	:= "1.0.6"
+			,  IniFile              	:= AppName . ".ini"
 			,  ResDir             	:= A_ScriptDir . "\Resources"
 			,  hFindTool
 			,  Descriptions    	:= Object()
@@ -128,23 +129,23 @@ return	ComObj(9,ComObjQuery(ComObjEnwrap(9,pacc),IID,IID),1).document.documentEl
 ;----------------------------------------------------------------------------------------------------------------------------------------------
 ; Main Window
 ;----------------------------------------------------------------------------------------------------------------------------------------------;{
-  ; needed for Gui Resize and MaxSize
 
-    Mon := Array(), MonHMax := 0
+  ; needed for Gui Resize and MaxSize
+    MonH := Array(), MonHMax := 0, GuiMinH := 530
 	SysGet, monitorCount, MonitorCount
 	Loop, % monitorCount		{
 		SpyMon:= ScreenDims(A_Index)
-		Mon[A_Index] := SpyMon.H - Floor(SpyMon.H/20) - TaskbarHeight(A_Index)  ; to have a little space above and below
-		MonHMax := MonHMax < Mon[A_Index] ? Mon[A_Index] : MonHMax
-		t.= Mon[A_Index] ", "
+		MonH[A_Index] := SpyMon.H - Floor(SpyMon.H/20) - TaskbarHeight(A_Index)  ; to have a little space above and below
+		MonHMax := MonHMax < MonH[A_Index] ? MonH[A_Index] : MonHMax
 	}
 
     Menu Tray, Icon, %ResDir%\WinSpy.ico
 
   ; 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶 🗗 🕶
 
-    Gui Spy: New, % "LabelSpy +HWNDhSpyWnd +Resize MinSize490x530 MaxSize490x" MonHMax
+    Gui Spy: New, % "LabelSpy +HWNDhSpyWnd +Resize MinSize490x" GuiMinH " MaxSize490x" MonHMax
 
+	Gui, % "-Resize  -MaxSize490x" MonHMax
     SetWindowIcon(hSpyWnd, ResDir . "\WinSpy.ico", 1)
 
     Gui Font, s9, Segoe UI
@@ -255,7 +256,7 @@ return	ComObj(9,ComObjQuery(ComObjEnwrap(9,pacc),IID,IID),1).document.documentEl
 		Gui Add, Edit        	, % "vResult x" (103) " y281 w" (195+plusW) " h21 Center -E0x200 ReadOnly"
 
 		winToggleH := 0
-		Gui Add, Button      	, % "gMaxMinResult vBtnMMResult x+25 yp+20 w20 h15"	     							,  ⯅	;⯆ ;  ⏶; ⏷
+		Gui Add, Button      	, % "gMaxMinGui vBtnMM x+25 yp+20 w20 h15"	     		            					,  ⯅	;⯆ ;  ⏶; ⏷
 		GuiControlGet, cpos, Pos, GBResult
 		Gui Add, GroupBox	, % "vMsgGroupBox x20 y" (cposY+cposH) " w" (360+plusW) " h" (385+plusH-cposY-cposH+20) " Center", Message Description
 		; *new* info control for brief message descriptions
@@ -357,6 +358,11 @@ return	ComObj(9,ComObjQuery(ComObjEnwrap(9,pacc),IID,IID),1).document.documentEl
 	; *new*: AlwaysOnTop at script start. I missed that.
 	WinSet AlwaysOnTop, % g_AlwaysOnTop ? "On" : "Off", % "ahk_id " hSpyWnd
 
+	; for resize
+	gp := GetWindowInfo(hSpyWnd)
+    lastGuiY := gp.Y
+    lastGuiH := gp.H
+
 ;}
 
 ; Commands menu     	;{
@@ -396,24 +402,43 @@ SpySize: ;{
 		return
 	Critical Off
 	Critical
+	Gui, Submit, NoHide
     Loop 6
 		GuiControl, MoveDraw, % "Btn" A_Index    	, % "y" A_GuiHeight-Btnh-10
 	GuiControl	 , MoveDraw, % "MsgGroupBox"		, % "h" A_GuiHeight-MsgY-BtnH
 	GuiControl	 , MoveDraw, % "MsgDescription"	, % "h" A_GuiHeight-MsgY-BtnH-10
 	GuiControl	 , MoveDraw, % "Tab"                	, % "h" A_GuiHeight-TabY-BtnH-15
 	Critical Off
+	If (Tab=4)
+		SetTimer, SpyAfterSize, -500
+return
+
+SpyAfterSize:
+	gp := GetWindowInfo(hSpyWnd)
+	lastGuiY 	:= gp.Y
+	lastGuiH 	:= gp.H
 return ;}
 
-MaxMinResult: ;{
+MaxMinGui: ;{
 
+	gp := GetWindowInfo(hSpyWnd)
+    If !winToggleH
+        lastTGuiY 	:= gp.Y, lastTGuiH 	:= gp.H
+
+  ; switch and toggle symbol
 	winToggleH := !winToggleH
-	gp := GetWindowInfo(hSpy)
-	SpyMonIndex:= GetMonitorIndexFromWindow(hSpyWnd, MonStats)
-	gp.H	:= winToggleH ? Mon[SpyMonIndex] : 530
-	gp.Y := gp.Y+gp.H>Mon[SpyMonIndex] ? Floor(Mon[SpyMonIndex]//2 - gp.H//2) : gp.Y
-	SetWindowPos(hSpy, gp.X, gp.Y, gp.W, gp.H)
-	ToolTip, % WhSpy inToggleH " | MonHMax: " MonHMax ",  unterseite: " gp.Y "-" Floor((Mon[SpyMonIndex] + gp.H)/2), 3000, 300, 1
 	GuiControl, Spy:, BtnMMResult, % (winToggleH ? "⯆" : "⯅")
+
+ToggleGuiMax:
+
+  ; resize H and calculate Y position
+	SpyMonIndex:= GetMonitorIndexFromWindow(hSpyWnd, MonStats)
+	gp.H	:= winToggleH ? MonH[SpyMonIndex] : GuiMinH
+	gp.Y := gp.Y+gp.H>MonH[SpyMonIndex] ? Floor(MonH[SpyMonIndex]//2 - gp.H//2) : gp.Y
+	SetWindowPos(hSpyWnd, gp.X
+										, winToggleH ? gp.Y : lastTGuiY
+										, gp.W
+										, gp.H)
 
 return ;}
 
@@ -423,7 +448,7 @@ return ;}
 ; Main Window - Labels & Functions
 ;----------------------------------------------------------------------------------------------------------------------------------------------;{
 
-MenuHandler: ;{
+MenuHandler:                              	;{
 
     If (A_ThisMenuItem == "Visible") {
         ShowWindow(g_hWnd, !IsWindowVisible(g_hWnd))
@@ -439,7 +464,7 @@ MenuHandler: ;{
 
 Return ;}
 
-MessageInfo: ;{
+MessageInfo:                                 	;{
 
 	Gui, Submit, NoHide
 
@@ -466,7 +491,7 @@ MessageInfo: ;{
 
 return ;}
 
-SetHandle: ;{
+SetHandle:                                   	;{
     Gui Spy: Submit, NoHide
 
     If (!Dragging && WinExist("ahk_id " . EdtHandle)) {
@@ -475,7 +500,7 @@ SetHandle: ;{
     }
 Return ;}
 
-SetText: ;{
+SetText:                                         	;{
     Gui Spy: Submit, NoHide
     If (IsChild(g_hWnd)) {
         ControlSetText,, %EdtText%, ahk_id %g_hWnd%
@@ -484,7 +509,7 @@ SetText: ;{
     }
 Return ;}
 
-ShowCommandsMenu: ;{
+ShowCommandsMenu:                 	;{
 
     UpdateCommandsMenu()
 
@@ -497,7 +522,7 @@ ShowCommandsMenu: ;{
 
 Return ;}
 
-SpyEscape:             	;{
+SpyEscape:                                   	;{
 SpyClose:
 
 	Gui, Spy: Submit, NoHide
@@ -523,7 +548,7 @@ SpyClose:
 
 ExitApp ;}
 
-ToggleAlwaysOnTop: ;{
+ToggleAlwaysOnTop:                   	;{
 
 	Gui, Spy: Submit, NoHide
 	WinSet AlwaysOnTop, % g_AlwaysOnTop ? "On" : "Off", ahk_id %hSpyWnd%
@@ -531,19 +556,44 @@ ToggleAlwaysOnTop: ;{
 
 return ;}
 
-TabHandler:          	;{
+TabHandler:                              		;{
+
     Gui Spy: Submit, NoHide
+
+	gp := GetWindowInfo(hSpyWnd)
+	H := Tab!=4 ? GuiMinH+300 : lastGuiH
+
+		SpyMonIndex:= GetMonitorIndexFromWindow(hSpyWnd, MonStats)
+		gp.Y := gp.Y+gp.H>MonH[SpyMonIndex] ? Floor(MonH[SpyMonIndex]//2 - gp.H//2) : gp.Y
+		;~ ToolTip, % H "!=" gp.H "`n(lastGuiH: "  lastGuiH ")" "`ngp.Y: " gp.Y "`gp.W: " gp.W, 800, 200, 3
+
+		If (Tab != 4) {
+			If (H != GuiMinH)
+				SetWindowPos(hSpyWnd, gp.X, gp.Y, gp.W, GuiMinH+300)
+			Gui, % "-Resize MaxSize"  ;+MinSize500x" GuiMinH+300 " -MaxSize500x" MonHMax
+		}
+		else if (Tab = 4) {
+			Gui, % "+Resize +MinSize500x" GuiMinH " +MaxSize500x" MonHMax
+			If (H != gp.H)
+				SetWindowPos(hSpyWnd, gp.X, lastGuiY, gp.W, lastGuiH)
+			Gui, % "+Resize +MinSize500x" GuiMinH " +MaxSize500x" MonHMax
+		}
+
+
+
+
+
     TabHandler(Tab)
 Return ;}
 
-WSReload:            	;{
+WSReload:                                		;{
 	g_reload := true
 	gosub SpyClose
 return ;}
 
 ;----------------------------------------------------------------------------------------------------------------------------------------------
 
-LoadWindowInfo() {
+LoadWindowInfo()                         	{
     Gui Spy: Default
 
     ; Handle
@@ -584,7 +634,7 @@ LoadWindowInfo() {
     GuiControl,, EdtSize, % W . " x " . H . " (" . wi.ClientW . " x " . wi.ClientH . ")"
 }
 
-LoadControlInfo(ClassNN) {
+LoadControlInfo(ClassNN)             	{
     If (ClassNN == "") {
         ClassNN := GetClassNNEx(g_hWnd)
     }
@@ -644,7 +694,7 @@ LoadControlInfo(ClassNN) {
     g_ExtraStyle := GetExtraStyle(g_hWnd)
 }
 
-ShowWindowInfo(ClassNN := "") {
+ShowWindowInfo(ClassNN := "")     	{
     GuiControl -g, EdtHandle
 
     If (IsChild(g_hWnd)) {
@@ -667,7 +717,7 @@ ShowWindowInfo(ClassNN := "") {
     GoSub UpdateTitleBar
 }
 
-TabHandler(Tab) {
+TabHandler(Tab)                            	{
     If (Tab == 7) { ; Process
         GoSub LoadProcessProperties
     } Else If (Tab == 4) { ; Messages
@@ -676,7 +726,7 @@ TabHandler(Tab) {
     }
 }
 
-UpdateCommandsMenu() {
+UpdateCommandsMenu()              	{
     Visible := IsWindowVisible(g_hWnd)
     Enabled := IsWindowEnabled(g_hWnd)
     WinGet ExStyle, ExStyle, ahk_id %g_hWnd%
